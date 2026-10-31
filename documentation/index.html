@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trustzen Documentation – Social Proof &amp; Testimonial Widgets SaaS (Next.js)</title>
+<style>
+  :root { --primary:#5b3fc4; --primary-soft:#efebfb; --ink:#1b1830; --muted:#5f5b73; --line:#e1def0; --paper:#f7f6fb; --surface:#fff; --marker:#f2c94c; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+  body { margin:0; font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color:var(--ink); background:var(--paper); }
+  a { color:var(--primary); }
+  code, pre, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+  code { background:var(--primary-soft); padding:.1em .35em; border-radius:4px; overflow-wrap:anywhere; }
+  pre { background:#1c1830; color:#ece9f7; padding:16px; border-radius:10px; overflow-x:auto; line-height:1.5; }
+  pre code { background:none; padding:0; color:inherit; overflow-wrap:normal; }
+  .layout { display:grid; grid-template-columns: 270px 1fr; min-height:100vh; }
+  nav.toc { position:sticky; top:0; height:100vh; overflow-y:auto; background:var(--surface); border-right:1px solid var(--line); padding:24px 18px; }
+  nav.toc .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px; margin-bottom:6px; }
+  nav.toc .brand span.mark { width:30px; height:30px; border-radius:9px; background:var(--primary); position:relative; display:inline-block; }
+  nav.toc .brand span.mark::after { content:""; position:absolute; right:6px; top:6px; width:9px; height:9px; border-radius:50%; background:var(--marker); }
+  nav.toc .version { color:var(--muted); font-size:13px; margin:0 0 18px; }
+  nav.toc ol { list-style:none; margin:0; padding:0; }
+  nav.toc li a { display:block; padding:5px 10px; border-radius:6px; color:var(--ink); text-decoration:none; font-size:14px; }
+  nav.toc li a:hover { background:var(--primary-soft); }
+  nav.toc li.sub a { padding-left:24px; color:var(--muted); font-size:13px; }
+  main { padding:40px 56px 80px; max-width:1000px; min-width:0; }
+  h1 { font-size:40px; line-height:1.15; margin:0 0 12px; letter-spacing:-.02em; }
+  h2 { font-size:28px; margin:56px 0 12px; padding-top:8px; border-top:1px solid var(--line); letter-spacing:-.01em; }
+  h3 { font-size:20px; margin:32px 0 8px; }
+  h4 { font-size:17px; margin:22px 0 6px; }
+  p, li { max-width:78ch; }
+  .lead { font-size:19px; color:var(--muted); }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .note { border-left:4px solid var(--primary); background:var(--primary-soft); padding:12px 16px; border-radius:6px; margin:16px 0; }
+  .warn { border-left:4px solid #c98a00; background:#fbf3dc; padding:12px 16px; border-radius:6px; margin:16px 0; }
+  .note p, .warn p { margin:.3em 0; }
+  table { border-collapse:collapse; width:100%; margin:14px 0; background:var(--surface); font-size:15px; }
+  th, td { border:1px solid var(--line); padding:8px 12px; text-align:left; vertical-align:top; }
+  th { background:#f0edf9; }
+  td code { white-space:nowrap; }
+  td.wrap code { white-space:normal; }
+  ol.steps > li { margin-bottom:10px; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:12px; }
+  .grid .card { margin:0; }
+  .tag { display:inline-block; background:var(--marker); color:#3d2e00; font-size:12px; font-weight:700; padding:1px 7px; border-radius:5px; vertical-align:middle; }
+  .widget { border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:4px 22px 14px; margin:18px 0; }
+  .widget h4 { margin-top:16px; }
+  .muted { color:var(--muted); }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } nav.toc { position:static; height:auto; } main { padding:24px 20px 60px; } td code { white-space:normal; } }
+  @media print { nav.toc { display:none; } .layout { display:block; } main { max-width:none; padding:0; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" aria-label="Contents">
+  <div class="brand"><span class="mark"></span>Trustzen</div>
+  <p class="version">Documentation · version 1.0.0</p>
+  <ol>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#package">Repository contents</a></li>
+    <li><a href="#install">Installation</a></li>
+    <li class="sub"><a href="#install-cpanel">cPanel / shared hosting</a></li>
+    <li class="sub"><a href="#install-vps">VPS (PM2 + Nginx)</a></li>
+    <li class="sub"><a href="#install-docker">Docker</a></li>
+    <li class="sub"><a href="#install-vercel">Vercel + cloud MySQL</a></li>
+    <li class="sub"><a href="#install-local">Local computer</a></li>
+    <li class="sub"><a href="#installer">Web installer</a></li>
+    <li class="sub"><a href="#first-steps">First steps</a></li>
+    <li><a href="#admin">Admin panel</a></li>
+    <li class="sub"><a href="#admin-dashboard">Dashboard</a></li>
+    <li class="sub"><a href="#admin-users">Users</a></li>
+    <li class="sub"><a href="#admin-plans">Plans &amp; limits</a></li>
+    <li class="sub"><a href="#admin-payments">Payments</a></li>
+    <li class="sub"><a href="#admin-sites">Websites</a></li>
+    <li class="sub"><a href="#admin-pages">Pages &amp; messages</a></li>
+    <li class="sub"><a href="#admin-blog">Blog</a></li>
+    <li class="sub"><a href="#admin-languages">Languages</a></li>
+    <li class="sub"><a href="#admin-settings">Settings</a></li>
+    <li class="sub"><a href="#admin-system">System</a></li>
+    <li><a href="#customer">Customer guide</a></li>
+    <li class="sub"><a href="#c-site">Adding a website</a></li>
+    <li class="sub"><a href="#c-snippet">Installing the snippet</a></li>
+    <li class="sub"><a href="#c-widgets">Widget types</a></li>
+    <li class="sub"><a href="#c-design">Design options</a></li>
+    <li class="sub"><a href="#c-rules">Display rules</a></li>
+    <li class="sub"><a href="#c-events">Events</a></li>
+    <li class="sub"><a href="#c-testimonials">Testimonials</a></li>
+    <li class="sub"><a href="#c-leads">Leads</a></li>
+    <li class="sub"><a href="#c-incoming">Incoming webhooks</a></li>
+    <li class="sub"><a href="#c-outgoing">Outgoing webhooks</a></li>
+    <li class="sub"><a href="#c-analytics">Analytics</a></li>
+    <li class="sub"><a href="#c-settings">Website settings</a></li>
+    <li><a href="#payments">Payment gateways</a></li>
+    <li><a href="#email">Email (SMTP)</a></li>
+    <li><a href="#i18n">Languages &amp; RTL</a></li>
+    <li><a href="#seo">SEO</a></li>
+    <li><a href="#privacy">Privacy &amp; GDPR</a></li>
+    <li><a href="#performance">Performance &amp; limits</a></li>
+    <li><a href="#customize">Customisation</a></li>
+    <li><a href="#demo">Demo mode</a></li>
+    <li><a href="#update">Updating</a></li>
+    <li><a href="#env">Environment variables</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+    <li><a href="#credits">Credits</a></li>
+    <li><a href="#changelog">Changelog</a></li>
+    <li><a href="#support">Support</a></li>
+  </ol>
+</nav>
+
+<main>
+<h1>Trustzen</h1>
+<p class="lead">Social proof, testimonial and conversion widgets as a service, built with Next.js 16, React 19 and Tailwind CSS 4. Open source under the MIT licence. This guide takes you from a fresh clone to a live platform with paying customers.</p>
+<div class="card">
+  <strong>Quick start:</strong> clone the repository and upload its <code>app</code> folder (renamed to <code>trustzen</code>), run <code>npm install</code> and <code>npm run build</code>, start the app, then open your domain in a browser. The web installer does the rest — no files to edit.
+</div>
+
+<!-- ───────────────────────────── Introduction ───────────────────────────── -->
+<h2 id="introduction">Introduction</h2>
+<p>Trustzen lets you run your own social proof platform, like the well-known paid services. Your customers sign up, add their websites, paste one line of code, and show <strong>10 kinds of widgets</strong> on their sites: recent purchases and signups, live visitor counts, conversion counters, reviews, announcement bars, coupons, countdown timers, email collectors, cookie notices and custom HTML popups.</p>
+<p>The data behind the widgets is real. It comes from the customer's own forms, from Stripe, WooCommerce, Shopify, Zapier or Make (incoming webhooks), from a CSV import, or is added by hand. Customers also get a hosted <strong>testimonial collection page</strong>, a moderation queue, an embeddable <strong>testimonial wall</strong>, a list of collected email leads with CSV export, per-widget analytics and outgoing webhooks.</p>
+<p>You earn money with <strong>paid plans</strong>. Plans limit the number of websites, widgets and monthly widget views, and can remove the “Powered by” branding. Payments are accepted through Stripe (automatic renewal), PayPal, Razorpay or manual bank transfer.</p>
+<p>The embed script (<code>w.js</code>) is about <strong>14 KB gzipped</strong>, has no dependencies, and draws its widgets inside a Shadow DOM, so it never clashes with the customer's own styles.</p>
+<div class="note">Words used in this guide: <strong>you</strong> or <strong>the administrator</strong> run the platform. <strong>Customers</strong> are the people who sign up on your platform. <strong>Visitors</strong> are the people who browse your customers' websites and see the widgets.</div>
+
+<!-- ───────────────────────────── Features ───────────────────────────── -->
+<h2 id="features">Features</h2>
+<div class="grid">
+  <div class="card"><strong>10 widget types</strong><br>Recent activity, live visitors, conversion counter, reviews, announcement bar, coupon, countdown, email collector, cookie notice, custom HTML.</div>
+  <div class="card"><strong>Visual widget editor</strong><br>Content, design and display rules with a live preview on a light or dark page, desktop or mobile size. Save with Ctrl+S.</div>
+  <div class="card"><strong>Display rules</strong><br>Pages (with wildcards), devices, trigger on load, delay, scroll or exit intent, rotation timing, frequency after closing, start and end dates.</div>
+  <div class="card"><strong>Real data sources</strong><br>Form capture, incoming webhooks (Stripe, WooCommerce, Shopify, Zapier, Make, any JSON), CSV import and manual events.</div>
+  <div class="card"><strong>Testimonials</strong><br>Hosted collection page with star rating and photo, moderation, auto-approve option and an embeddable testimonial wall.</div>
+  <div class="card"><strong>Leads</strong><br>Email collector popups, lead list with search and CSV export, email notification to the owner.</div>
+  <div class="card"><strong>Outgoing webhooks</strong><br>New leads, testimonials and events are sent as signed JSON (HMAC-SHA256) to any CRM, Zapier or Make.</div>
+  <div class="card"><strong>Analytics</strong><br>Views, hovers, clicks, conversions and click rate per widget and per day.</div>
+  <div class="card"><strong>Plans &amp; billing</strong><br>Unlimited plans with website, widget and monthly view limits and branding removal. Stripe, PayPal, Razorpay, bank transfer.</div>
+  <div class="card"><strong>Privacy first</strong><br>Anonymised names, no cookies set by widgets, no IP addresses stored for visitors, domain-locked API.</div>
+  <div class="card"><strong>Multi-language &amp; RTL</strong><br>Translate the whole public site and the customer dashboard. Widgets show relative times in the site's language.</div>
+  <div class="card"><strong>Admin panel</strong><br>Dashboard with revenue and widget views, users, plans, payments, websites, pages, blog, languages, messages, settings.</div>
+  <div class="card"><strong>Marketing site</strong><br>Home page, pricing page, blog with three starter articles, About, Privacy and Terms pages, contact form.</div>
+  <div class="card"><strong>Web installer</strong><br>MySQL/MariaDB or zero-setup SQLite. Database migrations run automatically on updates.</div>
+  <div class="card"><strong>Secure</strong><br>scrypt passwords, HTTP-only sessions, rate limits, HTML sanitising, SSRF protection for outgoing requests.</div>
+  <div class="card"><strong>No external CDNs</strong><br>Fonts and scripts are bundled. The embed script is built with the app.</div>
+</div>
+
+<!-- ───────────────────────────── Requirements ───────────────────────────── -->
+<h2 id="requirements">Requirements</h2>
+<table>
+  <tr><th>Item</th><th>Requirement</th></tr>
+  <tr><td>Node.js</td><td>20.9 or newer (22 LTS recommended). Node.js <strong>22.13+</strong> is needed only for the SQLite database option.</td></tr>
+  <tr><td>Database</td><td>MySQL 5.7+ / MariaDB 10.3+ (recommended for production), <em>or</em> the built-in SQLite option (no database server needed).</td></tr>
+  <tr><td>Hosting</td><td>Any host that runs Node.js apps: a VPS, cPanel with “Setup Node.js App”, Plesk, Docker, Railway, Render, etc.</td></tr>
+  <tr><td>HTTPS</td><td><strong>Required in production.</strong> Your customers' websites use HTTPS, and browsers block a script loaded over plain HTTP on an HTTPS page. Use a free Let's Encrypt certificate.</td></tr>
+  <tr><td>Memory</td><td>At least 1 GB RAM to build (<code>npm run build</code>). Running the platform needs about 200–300 MB.</td></tr>
+  <tr><td>Writable folder</td><td>The <code>storage</code> folder must be writable (configuration, SQLite database, uploaded logos and testimonial photos).</td></tr>
+  <tr><td>Outgoing connections</td><td>Ports 443/80 to the internet, for payment gateways and customers' outgoing webhooks. SMTP port 587 or 465 for email.</td></tr>
+</table>
+<div class="note">Static-only hosting (plain HTML hosting, GitHub Pages) cannot run Trustzen: the widget API, dashboard, accounts and payments need a Node.js server.</div>
+
+<!-- ───────────────────────────── Package ───────────────────────────── -->
+<h2 id="package">Repository contents</h2>
+<pre><code>trustzen/
+├── documentation/            This guide
+├── marketing/                Screenshot scripts and final screenshots
+└── app/                      The application source code
+    ├── src/
+    │   ├── app/              Pages, admin panel, customer dashboard, API routes
+    │   ├── components/       Shared UI, dashboard and widget editor
+    │   ├── lib/              Server code: database, plans, payments, email, webhooks
+    │   └── widget/           The embed script source (types, runtime, styles)
+    ├── scripts/
+    │   └── build-widget.mjs  Builds public/w.js (runs automatically with npm run build)
+    ├── public/               Public static files (w.js is generated here)
+    ├── storage/              Created data: config.json, SQLite database, uploads
+    ├── server.js             Start file for cPanel / Passenger / PM2
+    ├── ecosystem.config.cjs  PM2 configuration
+    ├── Dockerfile, docker-compose.yml
+    ├── .env.example          Optional environment variables
+    ├── README.md             Short developer notes
+    └── package.json</code></pre>
+<div class="note"><code>public/w.js</code>, the script your customers embed, is <strong>not</strong> in the repository. It is built from <code>src/widget</code> every time you run <code>npm run build</code> (or <code>npm run dev</code>). If you ever see a 404 for <code>/w.js</code>, run <code>npm run build</code> again and restart.</div>
+
+<!-- ───────────────────────────── Install ───────────────────────────── -->
+<h2 id="install">Installation</h2>
+<p>Pick the guide that matches your hosting. Every method ends with the <a href="#installer">web installer</a>.</p>
+<div class="note">Install Trustzen on its own domain or subdomain, for example <code>https://proof.example.com</code>. This address appears in every customer's install snippet, so choose it carefully: changing it later means every customer must update their snippet.</div>
+
+<h3 id="install-cpanel">cPanel / shared hosting (Setup Node.js App)</h3>
+<ol class="steps">
+  <li>In cPanel open <strong>MySQL® Databases</strong>. Create a database and a user, then add the user to the database with <em>All privileges</em>. Write down the database name, username and password.</li>
+  <li>Create the subdomain (e.g. <code>proof.example.com</code>) in <strong>Domains</strong> and turn on <strong>SSL/TLS Status → Run AutoSSL</strong> so it has HTTPS.</li>
+  <li>Open <strong>File Manager</strong> and upload <code>trustzen.zip</code> (the repository's <code>app</code> folder renamed to <code>trustzen</code>, zipped) to your home folder, e.g. <code>/home/youruser/trustzen</code>, and extract it. Do <em>not</em> put it inside <code>public_html</code>.</li>
+  <li>Open <strong>Setup Node.js App</strong> → <strong>Create Application</strong>:
+    <ul>
+      <li>Node.js version: the newest available (22.x recommended)</li>
+      <li>Application mode: <code>Production</code></li>
+      <li>Application root: <code>trustzen</code></li>
+      <li>Application URL: your domain or subdomain</li>
+      <li>Application startup file: <code>server.js</code></li>
+    </ul>
+    Click <strong>Create</strong>.</li>
+  <li>Click <strong>Run NPM Install</strong> and wait until it finishes.</li>
+  <li>Copy the command shown at the top of the page (it looks like <code>source /home/youruser/nodevenv/trustzen/22/bin/activate &amp;&amp; cd /home/youruser/trustzen</code>). Open <strong>Terminal</strong> in cPanel, paste it, then run:
+    <pre><code>npm run build</code></pre>
+    The build takes 1–4 minutes. It first prints <code>[widget] public/w.js … gzip</code> (the embed script), then builds the app.</li>
+  <li>Back in Setup Node.js App, click <strong>Restart</strong>. Open your domain: you will see the installer.</li>
+</ol>
+<p><code>server.js</code> starts the built Next.js app, which serves everything: pages, the API and the files in <code>public</code>, including <code>/w.js</code>. You don't need to copy anything into <code>public_html</code>.</p>
+<div class="warn">If the build stops with “JavaScript heap out of memory” your plan limits memory. Build on your own computer instead (<code>npm install &amp;&amp; npm run build</code>), then upload the whole folder <em>including</em> the <code>.next</code> folder and <code>public/w.js</code>, and only run “Run NPM Install” + “Restart” on the server.</div>
+
+<h3 id="install-vps">VPS (Ubuntu) with PM2 and Nginx</h3>
+<ol class="steps">
+  <li>Install Node.js 22, Nginx and PM2:
+<pre><code>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs nginx
+sudo npm install -g pm2</code></pre></li>
+  <li>Install MySQL (or use SQLite and skip this step):
+<pre><code>sudo apt install -y mysql-server
+sudo mysql -e "CREATE DATABASE trustzen CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'trustzen'@'localhost' IDENTIFIED BY 'choose-a-strong-password';
+GRANT ALL PRIVILEGES ON trustzen.* TO 'trustzen'@'localhost'; FLUSH PRIVILEGES;"</code></pre></li>
+  <li>Upload the <code>trustzen</code> folder to <code>/var/www/trustzen</code>, then:
+<pre><code>cd /var/www/trustzen
+npm ci
+npm run build
+pm2 start ecosystem.config.cjs
+pm2 save &amp;&amp; pm2 startup</code></pre></li>
+  <li>Create <code>/etc/nginx/sites-available/trustzen</code>:
+<pre><code>server {
+    listen 80;
+    server_name proof.example.com;
+    client_max_body_size 10m;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}</code></pre>
+Enable it and add a free SSL certificate:
+<pre><code>sudo ln -s /etc/nginx/sites-available/trustzen /etc/nginx/sites-enabled/
+sudo nginx -t &amp;&amp; sudo systemctl reload nginx
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d proof.example.com</code></pre></li>
+  <li>Open <code>https://proof.example.com</code> to run the installer.</li>
+</ol>
+<div class="note">Keep <code>instances: 1</code> in <code>ecosystem.config.cjs</code>. Rate limits, the 30-second widget cache and webhook duplicate detection are kept in memory, per process. One Node.js process handles a lot of traffic (see <a href="#performance">Performance</a>).</div>
+
+<h3 id="install-docker">Docker</h3>
+<p>The <code>app</code> folder includes a <code>Dockerfile</code> and a <code>docker-compose.yml</code> with MySQL 8.4:</p>
+<pre><code>cd trustzen
+docker compose up -d --build</code></pre>
+<p>Open <code>http://your-server:3000</code>. In the installer choose MySQL with host <code>db</code>, port <code>3306</code>, database <code>trustzen</code>, user <code>trustzen</code>, password <code>trustzen</code> (change these and <code>MYSQL_ROOT_PASSWORD</code> in <code>docker-compose.yml</code> first). The <code>storage</code> folder is kept in a Docker volume. Put Nginx, Caddy or Traefik with HTTPS in front of port 3000.</p>
+<p>Without Compose:</p>
+<pre><code>docker build -t trustzen .
+docker run -d -p 3000:3000 -v trustzen-storage:/app/storage trustzen</code></pre>
+
+<h3 id="install-vercel">Vercel (with a cloud MySQL database)</h3>
+<p>Vercel has no permanent disk, so the web installer and SQLite can't be used there. Instead, Trustzen is configured with environment variables and a cloud MySQL-compatible database such as <strong>TiDB Cloud Serverless</strong> (free tier), Aiven or PlanetScale.</p>
+<ol class="steps">
+  <li>Create a database. In TiDB Cloud: create a <em>Serverless</em> cluster in the region closest to your visitors, open <strong>Connect</strong>, generate a password and note the host, port (4000), user and password. In the SQL editor run <code>CREATE DATABASE trustzen;</code></li>
+  <li>Fork <a href="https://github.com/epifive/trustzen">this repository</a> on GitHub (or push your own copy).</li>
+  <li>In Vercel click <strong>Add New → Project</strong>, import the repository and set <strong>Root Directory</strong> to <code>app</code> (the folder that contains <code>package.json</code>). Keep the default build command (<code>npm run build</code>): it also builds <code>w.js</code>.</li>
+  <li>Add these <strong>Environment Variables</strong>:
+<pre><code>DB_DRIVER=mysql
+DB_HOST=gateway01.ap-southeast-1.prod.aws.tidbcloud.com
+DB_PORT=4000
+DB_USER=xxxxxxxx.root
+DB_PASSWORD=your-password
+DB_NAME=trustzen
+DB_SSL=true
+APP_INSTALLED=true
+ADMIN_EMAIL=you@example.com
+ADMIN_PASSWORD=a-strong-password
+ADMIN_NAME=Your Name
+SITE_URL=https://proof.example.com</code></pre></li>
+  <li>Click <strong>Deploy</strong>. Tables are created automatically on the first visit and the administrator account is created from <code>ADMIN_EMAIL</code> / <code>ADMIN_PASSWORD</code>.</li>
+  <li>Add your domain in <strong>Settings → Domains</strong>, and set the same address in Admin → Settings → General → <em>Site URL</em>.</li>
+  <li>In Vercel open <strong>Settings → Functions</strong> and choose the region closest to your database for the best speed.</li>
+</ol>
+<div class="warn">
+  <p>Vercel is fine for a demo or a small platform, but a VPS or cPanel is recommended for production:</p>
+  <ul>
+    <li>Uploaded files are not kept (no permanent disk). Paste image URLs for the logo and favicon instead of uploading. Testimonial <strong>photos</strong> uploaded on the collection page can't be stored either, so a testimonial sent with a photo fails; customers can still send testimonials without a photo, and add photo URLs by hand in the dashboard.</li>
+    <li>Rate limits, the widget cache and webhook duplicate detection are kept per serverless instance.</li>
+  </ul>
+</div>
+
+<h3 id="install-local">Local computer (for testing or customising)</h3>
+<pre><code>cd trustzen
+npm install
+npm run dev</code></pre>
+<p>Open <code>http://localhost:3000</code> and choose <strong>SQLite</strong> in the installer. To try widgets locally, add a website with the domain <code>localhost</code> in the dashboard and paste its snippet into any HTML page served from <code>http://localhost</code> (any port).</p>
+
+<h3 id="installer">Web installer</h3>
+<ol class="steps">
+  <li><strong>Requirements</strong> – checks the Node.js version and that <code>storage</code> is writable.</li>
+  <li><strong>Database</strong> – choose MySQL/MariaDB (host, port, database, user, password, and <em>Use SSL</em> for cloud databases) or SQLite. Click <em>Test connection</em>, then <em>Continue</em>.</li>
+  <li><strong>Site &amp; admin</strong> – enter your platform name, the full site URL (e.g. <code>https://proof.example.com</code>) and the administrator account. Click <em>Install now</em>.</li>
+</ol>
+<p>The installer creates all tables, the three default plans (Free, Pro, Agency), the About, Privacy policy and Terms of service pages and three starter blog posts. It writes <code>storage/config.json</code> and locks itself (<code>storage/installed.lock</code>). Sign in at <code>/login</code>. The admin panel is at <code>/admin</code>, the customer dashboard at <code>/dashboard</code>.</p>
+<div class="note">To run the installer again (e.g. to switch databases), delete <code>storage/installed.lock</code> and <code>storage/config.json</code> and restart the app. Existing data in the old database is not deleted.</div>
+
+<h3 id="first-steps">First steps after installing</h3>
+<p>The admin dashboard shows a <em>Finish setting up</em> checklist. In short:</p>
+<ol class="steps">
+  <li><strong>Settings → General</strong>: check the <em>Site URL</em> (it must be your public <code>https://</code> address; the install snippet and webhook URLs are built from it), add your logo and contact email.</li>
+  <li><strong>Settings → Widgets</strong>: set the branding text, e.g. “Powered by YourBrand”.</li>
+  <li><strong>Plans</strong>: adjust prices and limits.</li>
+  <li><strong>Settings → Payments</strong>: connect at least one payment gateway.</li>
+  <li><strong>Settings → Email</strong>: configure SMTP (password resets and notifications).</li>
+  <li>Open <strong>/dashboard</strong>, add your own website and create a few widgets. Then show them on your marketing pages with <em>Settings → Widgets → Show widgets on this website</em>.</li>
+</ol>
+
+<!-- ───────────────────────────── Admin ───────────────────────────── -->
+<h2 id="admin">Admin panel</h2>
+<p>Open <code>/admin</code> while signed in as an administrator. The menu has Dashboard, Users, Plans, Payments, Websites, Pages, Blog, Languages, Messages, Settings and System. Administrators also have a customer dashboard (<code>/dashboard</code>) for their own websites, without any plan limits.</p>
+
+<h3 id="admin-dashboard">Dashboard</h3>
+<p>Shows the number of users, active paid plans, revenue this month and widget views over the last 30 days, a chart of daily widget views for the last 14 days, the busiest websites, the newest users, the latest payments and the <em>Finish setting up</em> checklist.</p>
+
+<h3 id="admin-users">Users</h3>
+<p>Search and filter users (paid, admins, banned). Open a user to edit the name, email, role (user or admin) and status (active or banned), set a new password, or give a paid plan until a date you choose — useful for bank transfers, gifts or testing. The user page also lists their payments.</p>
+<p>Banning a user signs them out, and the widgets on all their websites stop loading. Their data is kept.</p>
+
+<h3 id="admin-plans">Plans &amp; limits</h3>
+<p>The installer creates three plans. Prices are in your currency (Settings → Payments).</p>
+<table>
+  <tr><th>Plan</th><th>Price</th><th>Websites</th><th>Widgets</th><th>Widget views / month</th><th>Branding</th><th>Webhooks</th></tr>
+  <tr><td><strong>Free</strong></td><td>0</td><td>1</td><td>3</td><td>1,000</td><td>Shown</td><td>No</td></tr>
+  <tr><td><strong>Pro</strong> <span class="tag">Recommended</span></td><td>19 / month or 190 / year</td><td>5</td><td>30</td><td>50,000</td><td>Removed</td><td>Yes</td></tr>
+  <tr><td><strong>Agency</strong></td><td>49 / month or 490 / year</td><td>50</td><td>Unlimited</td><td>500,000</td><td>Removed</td><td>Yes</td></tr>
+</table>
+<p>Each plan has these fields:</p>
+<table>
+  <tr><th>Field</th><th>Meaning</th></tr>
+  <tr><td>Name, short description</td><td>Shown on the pricing page.</td></tr>
+  <tr><td>Monthly price, yearly price</td><td>Enter the amount, e.g. <code>19.00</code>. <code>0</code> hides that billing period.</td></tr>
+  <tr><td>Websites</td><td>How many websites the customer can add. <strong>0 = unlimited.</strong></td></tr>
+  <tr><td>Widgets (all websites together)</td><td>Total widgets across all the customer's websites. <strong>0 = unlimited.</strong></td></tr>
+  <tr><td>Widget views per month</td><td>See below. <strong>0 = unlimited.</strong> Widgets pause when the limit is reached.</td></tr>
+  <tr><td>Features</td><td>One per line. Shown with a tick on the pricing page. This is display text only; the limits above are what is enforced.</td></tr>
+  <tr><td>Remove branding</td><td>Hides the “Powered by …” link inside widgets and on the testimonial wall.</td></tr>
+  <tr><td>Recommended</td><td>Highlights the plan on the pricing page.</td></tr>
+  <tr><td>Show on pricing page</td><td>Hidden plans can still be given to users by an administrator.</td></tr>
+  <tr><td>This is the free plan</td><td>Mark exactly one plan as free. Its limits apply to every customer without an active paid plan.</td></tr>
+  <tr><td>Sort order</td><td>Lower numbers appear first.</td></tr>
+</table>
+<h4>What is a “widget view”?</h4>
+<p>One view is counted each time a widget actually <strong>appears</strong> on a visitor's screen: a popup slides in, a bar is shown, a modal opens. A widget that never shows (wrong page, wrong device, not triggered, below its minimum count) costs nothing. Rotating widgets (recent activity and reviews) count one view for every item they show, so a popup that shows 5 recent purchases on one page view counts 5 views. Use <em>Items per page view</em> in the display rules to control this.</p>
+<p>Views are added up per customer account, across all their websites, per calendar month (UTC). They reset on the 1st of each month. When the limit is reached, the customer's widgets stop showing until the next month or until they upgrade. The testimonial wall and the live preview in the editor do not count as views.</p>
+<h4>Webhooks and paid plans</h4>
+<p>Incoming webhooks (Stripe, WooCommerce, Shopify, Zapier, Make) and setting an outgoing webhook URL are available to every customer with an <strong>active paid plan</strong>. On the free plan, webhook requests are refused with HTTP status <code>402</code>. There is no separate switch for this per plan; the “Webhooks and integrations” line in the plan features is only text.</p>
+<h4>Administrators and downgrades</h4>
+<ul>
+  <li>Administrators never have limits, and their widgets never show branding.</li>
+  <li>When a paid plan ends, the customer moves back to the free plan. Nothing is deleted. Existing websites keep working, but new websites and widgets can't be added while they are above the limit, and each website shows only its first widgets up to the plan's widget limit. The dashboard shows a notice explaining this.</li>
+</ul>
+
+<h3 id="admin-payments">Payments</h3>
+<p>Every payment from every gateway, with a filter by status. Bank transfers wait here with the customer's transaction reference: click <em>Approve</em> to activate the plan, or <em>Reject</em>. Paying again while a plan is active adds another month or year to it.</p>
+
+<h3 id="admin-sites">Websites</h3>
+<p>An overview of every website on the platform with its domain, its owner and its activity. Use it to find your most active customers, check a customer's setup when they ask for help, or spot abuse (for example fake activity, see the <a href="#privacy">honest-use policy</a>). Customers create and manage their websites themselves in their dashboard; the admin dashboard also lists the busiest websites of the last 30 days.</p>
+
+<h3 id="admin-pages">Pages &amp; messages</h3>
+<p>Create content pages (About, Privacy policy, Terms…) in Markdown. They are published at <code>/p/your-slug</code> and can be linked in the footer. <code>{site_name}</code> and <code>{site_email}</code> are replaced automatically. The default Privacy policy already describes what the widgets store — review it with your own legal details before launch. <strong>Messages</strong> lists contact-form submissions; reply by email with one click.</p>
+
+<h3 id="admin-blog">Blog</h3>
+<p>Write articles in Markdown at <strong>Admin → Blog</strong>. Each post has a title, URL slug (<code>/blog/your-slug</code>), excerpt, cover image (upload or URL), meta description and status. Leave the publish date empty to publish now, or pick a future date (UTC) to schedule the post. Published posts appear at <code>/blog</code>, in the sitemap and, the latest three, on the home page. Three starter articles about social proof and testimonials are included. Switch the whole blog off in Settings → General.</p>
+
+<h3 id="admin-languages">Languages</h3>
+<p>Add languages and translate the public site and the customer dashboard. See <a href="#i18n">Languages &amp; RTL</a>.</p>
+
+<h3 id="admin-settings">Settings</h3>
+<table>
+  <tr><th>Section</th><th>What you configure</th></tr>
+  <tr><td>General</td><td>Platform name, tagline, <strong>Site URL</strong>, contact email, logo (light and dark), favicon, footer text, copyright line, blog on/off.</td></tr>
+  <tr><td>Appearance</td><td>Brand colour, default theme (light/dark/follow the device), home page headline and introduction, benefits strip.</td></tr>
+  <tr><td>SEO</td><td>Home title and description, keywords, title separator, social image, Google/Bing verification, extra robots.txt rules.</td></tr>
+  <tr><td>Widgets</td><td>Branding inside customers' widgets, and widgets on your own marketing site. See below.</td></tr>
+  <tr><td>Payments</td><td>Currency and the four gateways.</td></tr>
+  <tr><td>Email</td><td>SMTP server for password resets, contact-form messages and customers' lead and testimonial notifications.</td></tr>
+  <tr><td>Users</td><td>Open/close registration, contact page, cookie notice on your own site.</td></tr>
+  <tr><td>Advanced</td><td>Maintenance mode, analytics code, additional code (chat widgets).</td></tr>
+</table>
+<h4 id="admin-widgets-settings">Settings → Widgets</h4>
+<ul>
+  <li><strong>Branding text</strong> – shown as a small link at the bottom of widgets, e.g. “Powered by Trustzen”. Change it to your brand. Leave it empty to never show branding, on any plan. Plans with <em>Remove branding</em> never show it.</li>
+  <li><strong>Branding link</strong> – where the link goes. Leave empty to use your Site URL. Free customers' widgets become free advertising for your platform.</li>
+  <li><strong>Show widgets on this website</strong> – paste the <code>data-site</code> key of one of <em>your own</em> websites from the dashboard. Its widgets then run on your public pages (home, pricing, blog, pages). This is the best demo of your product. The website you choose must use your platform's domain (e.g. <code>proof.example.com</code>) as its domain, or have it as an extra allowed domain, otherwise the widget API refuses the requests. Leave empty to show none.</li>
+</ul>
+<div class="note">Maintenance mode only hides your public marketing pages. The customer dashboard and the widgets on customers' websites keep working.</div>
+
+<h3 id="admin-system">System</h3>
+<p>Shows the version, Node.js, database type and applied migrations. It lets you clear caches, remove expired sessions and send a test email.</p>
+
+<!-- ───────────────────────────── Customer guide ───────────────────────────── -->
+<h2 id="customer">Customer guide</h2>
+<p>This chapter explains the customer dashboard (<code>/dashboard</code>). You can copy parts of it into your own help pages or blog. Each website has its own menu: Overview, Widgets, Events, Testimonials, Leads, Integrations, Analytics and Settings. The top level shows all websites and the plan usage meters (websites, widgets, widget views this month).</p>
+
+<h3 id="c-site">Adding a website</h3>
+<ol class="steps">
+  <li>Click <strong>Add website</strong>. Enter a name (only you see it) and the domain, e.g. <code>shop.com</code>. You can paste a full address; <code>https://</code>, <code>www.</code> and the path are removed.</li>
+  <li>The widgets work on that domain <strong>and all its subdomains</strong> (<code>www.shop.com</code>, <code>blog.shop.com</code>). For other domains, such as a staging site, add them under <em>Settings → Extra allowed domains</em> (up to 20).</li>
+  <li>After saving, the website overview shows the install snippet and the status <em>Waiting for first visit</em>.</li>
+</ol>
+
+<h3 id="c-snippet">Installing the snippet</h3>
+<p>Every website has one snippet. It looks like this:</p>
+<pre><code>&lt;script async src="https://proof.example.com/w.js" data-site="aBcD3fGh2JkL"&gt;&lt;/script&gt;</code></pre>
+<p>Paste it once, just before <code>&lt;/head&gt;</code>, on every page. Widgets are then managed only from the dashboard; the snippet never changes. After installing, open the website once. The status changes to <strong>Installed</strong> within a few seconds of the first visit.</p>
+<table>
+  <tr><th>Platform</th><th>Steps</th></tr>
+  <tr><td>Any HTML</td><td>Open the template every page shares, paste the snippet just before <code>&lt;/head&gt;</code>, upload the file and reload the website.</td></tr>
+  <tr><td>WordPress</td><td>Install a header and footer plugin such as <em>WPCode (Insert Headers and Footers)</em>. Paste the snippet into the <em>Header</em> section and save. Clear any caching plugin.</td></tr>
+  <tr><td>Shopify</td><td>Online Store → Themes → <em>…</em> next to your theme → <em>Edit code</em>. Open <code>layout/theme.liquid</code>, paste the snippet just before <code>&lt;/head&gt;</code> and click Save.</td></tr>
+  <tr><td>Wix</td><td>Settings → Advanced → <em>Custom code</em> → <em>Add custom code</em>. Paste the snippet, choose <em>All pages</em> and place it in <em>Head</em>. Apply and publish. Needs a Wix premium plan with a connected domain.</td></tr>
+  <tr><td>Squarespace</td><td>Settings → Advanced → <em>Code injection</em> (Website → Pages → Custom code in newer versions). Paste into <em>Header</em> and save. Needs a Business or Commerce plan.</td></tr>
+  <tr><td>Google Tag Manager</td><td>New tag → <em>Custom HTML</em>. Paste the snippet, set the trigger to <em>All Pages</em> (Initialization or Page View), save and <em>Submit</em> to publish the container.</td></tr>
+</table>
+<div class="note">The snippet is domain-locked: the widget API only answers requests from the website's own domain, its subdomains and its extra allowed domains. Copying a snippet to another website does nothing.</div>
+
+<h3 id="c-widgets">Widget types</h3>
+<p>Click <strong>New widget</strong>, pick a type and you get sensible defaults. Every widget has three tabs: <em>Content</em> (below), <a href="#c-design">Design</a> and <a href="#c-rules">Display rules</a>. The live preview updates as you type. Switch a widget off with the <em>Active</em> toggle without deleting it, or <em>Duplicate</em> it to try a variation.</p>
+<p>Message templates support placeholders in curly brackets. Click a placeholder under the field to insert it.</p>
+
+<div class="widget">
+<h4>1. Recent activity <span class="muted">— real purchases and signups as they happen</span></h4>
+<p>A popup that rotates through the latest events, e.g. “<strong>Anna</strong> from Berlin, Germany purchased <strong>Pro plan</strong> · 2 hours ago”.</p>
+<ul>
+  <li><strong>Show these events</strong> – purchases, signups, reviews, custom events.</li>
+  <li><strong>Message</strong> – placeholders <code>{name}</code>, <code>{city}</code>, <code>{country}</code>, <code>{product}</code>, <code>{location}</code> (city and country together). Default: <code>{name} from {location} purchased {product}</code>.</li>
+  <li><strong>Name when unknown</strong> – e.g. “Someone”.</li>
+  <li><strong>Customer names</strong> – first name only (default), initials only, or full name.</li>
+  <li><strong>Link</strong> – clicking the popup opens the event's own link, or this one when set.</li>
+  <li><strong>Only events from the last</strong> – hours (default 168 = one week, 0 = no limit).</li>
+  <li><strong>Events to rotate</strong> – 1 to 30 of the newest events (default 20).</li>
+  <li><strong>Show when it happened</strong> and <strong>Shuffle the order</strong>.</li>
+</ul>
+</div>
+
+<div class="widget">
+<h4>2. Live visitors <span class="muted">— how many people are browsing right now</span></h4>
+<ul>
+  <li><strong>Message</strong> – placeholder <code>{count}</code>. Default: “{count} people are viewing this page right now”.</li>
+  <li><strong>Count visitors on</strong> – the same page, or the whole website.</li>
+  <li><strong>Show from</strong> – the widget stays hidden while fewer people are online (default 2). It appears by itself when more visitors arrive.</li>
+</ul>
+<p>Visitors count as online while their browser sent a heartbeat in the last 90 seconds (one small request a minute while the page is open).</p>
+</div>
+
+<div class="widget">
+<h4>3. Conversion counter <span class="muted">— signups or sales in the last hours</span></h4>
+<ul>
+  <li><strong>Message</strong> – placeholders <code>{count}</code> and <code>{hours}</code>. Default: “{count} people signed up in the last {hours} hours”.</li>
+  <li><strong>Count these events</strong> – any of the four event kinds.</li>
+  <li><strong>Time period</strong> – in hours (24 = today, 168 = a week; up to 90 days).</li>
+  <li><strong>Minimum to show</strong> – hidden while the number is lower (default 3), so small numbers never work against you.</li>
+</ul>
+</div>
+
+<div class="widget">
+<h4>4. Reviews <span class="muted">— rotating testimonials with star ratings</span></h4>
+<ul>
+  <li><strong>Reviews from</strong> – approved testimonials (from the collection page or added by hand), or review events (e.g. sent by a webhook).</li>
+  <li><strong>Minimum rating</strong> – 1 to 5 stars (default 4).</li>
+  <li><strong>Reviews to rotate</strong> – 1 to 30 (default 10). <strong>Shuffle the order</strong>.</li>
+  <li><strong>Shorten long reviews after</strong> – 60 to 400 characters (default 160); longer texts end with “…”.</li>
+</ul>
+</div>
+
+<div class="widget">
+<h4>5. Announcement bar <span class="muted">— a slim bar for news, offers and launches</span></h4>
+<ul>
+  <li><strong>Badge</strong> – a short label before the text, e.g. “New”. Empty for none.</li>
+  <li><strong>Text</strong>, <strong>Button text</strong> and <strong>Button link</strong> (leave the button text empty to hide the button).</li>
+</ul>
+<p>Defaults to a top bar shown as soon as the page loads.</p>
+</div>
+
+<div class="widget">
+<h4>6. Coupon <span class="muted">— a discount code visitors copy in one click</span></h4>
+<ul>
+  <li><strong>Headline</strong>, <strong>Text</strong>, <strong>Coupon code</strong>.</li>
+  <li><strong>Copy button text</strong> and <strong>After copying</strong> (e.g. “Copied!”). Copying the code counts as a conversion.</li>
+</ul>
+</div>
+
+<div class="widget">
+<h4>7. Countdown timer <span class="muted">— urgency for sales and limited offers</span></h4>
+<ul>
+  <li><strong>Text</strong> – shown before the timer, e.g. “Sale ends in”.</li>
+  <li><strong>Count down to</strong> – <em>a fixed date</em> (everyone sees the same deadline, set in your time zone) or <em>per visitor</em> (each visitor gets the same amount of time, e.g. 30 minutes, from their first visit; up to 30 days).</li>
+  <li><strong>Button text</strong> and <strong>Button link</strong>.</li>
+  <li><strong>When the timer reaches zero</strong> – hide the widget, or show a message (“The offer has ended.”).</li>
+</ul>
+</div>
+
+<div class="widget">
+<h4>8. Email collector <span class="muted">— turn visitors into subscribers and leads</span></h4>
+<ul>
+  <li><strong>Headline</strong> and <strong>Text</strong>.</li>
+  <li><strong>Ask for the name too</strong>, with placeholders for both fields.</li>
+  <li><strong>Button text</strong> and <strong>Thank-you message</strong>.</li>
+  <li><strong>Consent note</strong> (optional) – e.g. a line about your privacy policy, shown under the form.</li>
+</ul>
+<p>New subscribers appear under <a href="#c-leads">Leads</a>. A visitor who subscribed doesn't see the form again on that browser. Defaults to appearing after 50% scroll and hiding for a day after it is closed.</p>
+</div>
+
+<div class="widget">
+<h4>9. Cookie notice <span class="muted">— a simple, friendly cookie consent bar</span></h4>
+<ul>
+  <li><strong>Text</strong>, <strong>Accept button text</strong>, <strong>Policy link text</strong> and <strong>Policy link</strong>.</li>
+</ul>
+<p>After the visitor accepts, the notice is not shown again on that browser. This is an information notice with an accept button; it does not block other scripts on the page. Websites that need full consent management (blocking tags before consent) should use a dedicated consent tool.</p>
+</div>
+
+<div class="widget">
+<h4>10. Custom HTML <span class="muted">— your own message or markup in a popup</span></h4>
+<ul>
+  <li><strong>Your HTML</strong> – text formatting, links, lists, headings and images are allowed. Scripts, styles, forms, frames, event handlers and <code>javascript:</code> links are removed when saving (and again in the browser).</li>
+</ul>
+</div>
+
+<h3 id="c-design">Design options</h3>
+<table>
+  <tr><th>Option</th><th>Values</th></tr>
+  <tr><td>Position</td><td>Bottom left, bottom right, top left, top right (floating popups), top bar, bottom bar (full width), centre (a modal over the page).</td></tr>
+  <tr><td>Width</td><td>240–480 px for popups (default 340). Popups never get wider than the visitor's screen. Ignored by bars.</td></tr>
+  <tr><td>Theme</td><td>Light, dark, or auto (follows the visitor's light/dark system setting).</td></tr>
+  <tr><td>Colours</td><td>Accent, background and text. Leave a colour empty to use the theme default. Links and buttons keep a readable contrast automatically.</td></tr>
+  <tr><td>Corner radius</td><td>0–32 px.</td></tr>
+  <tr><td>Animation</td><td>Slide, fade or none. Visitors who prefer reduced motion get no movement.</td></tr>
+  <tr><td>Font</td><td>Your website's font, or a system font.</td></tr>
+  <tr><td>Drop shadow, close button, image or icon</td><td>On/off switches. “Image or icon” shows the product image, avatar or an icon when available.</td></tr>
+</table>
+<p>Widgets are drawn inside a Shadow DOM: the website's CSS can't break them and they can't change the website's design. Widgets that share a position wait for each other and appear one after the other, never on top of each other. Corner popups keep clear of visible top and bottom bars. On phones, corner popups are shown at the bottom of the screen. On right-to-left websites, left and right corners are swapped. Visitors can close a widget with its close button or the Escape key.</p>
+
+<h3 id="c-rules">Display rules</h3>
+<table>
+  <tr><th>Rule</th><th>Details</th></tr>
+  <tr><td>Pages</td><td>All pages, <em>Only on…</em> or <em>All except…</em>. One path per line, matched against the address path. <code>*</code> is a wildcard: <code>/blog/*</code>, <code>/products/*</code>, <code>/</code> (home page only).</td></tr>
+  <tr><td>Devices</td><td>Desktop, mobile or both.</td></tr>
+  <tr><td>Show the widget</td><td>As soon as the page loads; after a delay (0–600 seconds); after the visitor scrolls (1–100% of the page); or when the visitor is about to leave (desktop: the cursor moves towards the browser tabs; mobile: after the delay, 15 seconds when it is 0).</td></tr>
+  <tr><td>Stay visible for</td><td>Seconds each item stays on screen. <code>0</code> = until the visitor closes it.</td></tr>
+  <tr><td>Pause between items</td><td>Rotating widgets: seconds before the next item appears.</td></tr>
+  <tr><td>Items per page view</td><td>Rotating widgets stop after this many items (1–50). Each item counts as a widget view.</td></tr>
+  <tr><td>After the visitor closes it</td><td>Show it again on the next page, hide until the next visit (browser session), hide for a day, or never show it again. Remembered in the visitor's browser.</td></tr>
+  <tr><td>Schedule</td><td>Optional start and end date and time, in your time zone. Outside these dates the widget is not shown.</td></tr>
+</table>
+
+<h3 id="c-events">Events</h3>
+<p>Events are the real activity that Recent activity, Conversion counter and Reviews (review events) widgets show. Each event has a kind (<code>purchase</code>, <code>signup</code>, <code>review</code> or <code>custom</code>), a name, city, country, product, optional link, image, rating (1–5), message and time. The <strong>Events</strong> page lists them with a filter by kind. You can <em>hide</em> an event from widgets (it stays in the list) or delete it. The list shows how each name will appear publicly, e.g. <em>Shown as “Anna”</em>.</p>
+<p>Events arrive from four sources:</p>
+<h4>Form capture</h4>
+<p>Turn on <em>Settings → Form capture → Capture form submissions</em> and choose the event kind to create (e.g. signup). The install snippet then watches the website's own forms (signup, checkout, contact). When a form with a name field is submitted, an event is created with:</p>
+<ul>
+  <li>the <strong>first name only</strong>, from a field named <code>name</code>, <code>first_name</code>, <code>firstname</code>, <code>fname</code>, <code>full_name</code> or <code>your_name</code> (also inside brackets, e.g. <code>billing[first_name]</code>);</li>
+  <li>optionally the city (<code>city</code>, <code>town</code>), country (<code>country</code>) and product (<code>product</code>, <code>product_name</code>, <code>item</code>, <code>plan</code>).</li>
+</ul>
+<p>Email fields, passwords, payment fields and everything else are never read. Forms with a password, search or card field, and search forms, are skipped.</p>
+<h4>Webhooks</h4>
+<p>Orders from Stripe, WooCommerce, Shopify, Zapier, Make or your own code. See <a href="#c-incoming">Incoming webhooks</a>.</p>
+<h4>Manual</h4>
+<p><em>Add event</em> on the Events page, for sales from other channels such as phone or in-store orders. Leave the time empty for “now”.</p>
+<h4>CSV import</h4>
+<p>Bring in past orders or signups from a spreadsheet. The first row must contain column names. Use any of these columns, in any order:</p>
+<pre><code>kind,name,city,country,product,url,image,rating,message,created_at
+purchase,Anna Schmidt,Berlin,Germany,Pro plan,,,,,2026-10-14T09:30:00Z
+signup,Liam,London,United Kingdom,,,,,,2026-10-15T16:05:00Z
+review,Priya,Mumbai,India,Starter kit,,,5,Fast delivery and great quality.,</code></pre>
+<ul>
+  <li>Each row needs a <code>name</code> or a <code>product</code>. <code>kind</code> is purchase, signup, review or custom (purchase when empty).</li>
+  <li><code>rating</code> is 1 to 5. <code>created_at</code> is a date such as <code>2026-10-16T10:00:00Z</code> (empty = now). Rows with invalid values are skipped and counted.</li>
+  <li>Up to 2,000 rows and 1 MB per file, 20 imports per hour. A sample file can be downloaded on the page.</li>
+</ul>
+
+<h3 id="c-testimonials">Testimonials</h3>
+<h4>Collection page</h4>
+<p>Every website has a hosted page at <code>https://proof.example.com/t/&lt;site key&gt;</code>. Customers share it after a purchase, in emails or on a thank-you page. Their clients fill in their name, optional email (never shown), optional job title or company, a 1–5 star rating, the testimonial (20–1,000 characters) and an optional photo (PNG, JPG or WebP, up to 1 MB). The page title and text are set in <em>Settings → Testimonials</em>. One visitor can send 3 testimonials per hour per website.</p>
+<h4>Moderation</h4>
+<p>New testimonials wait in <em>Pending</em>. Approve, reject, move back to pending or delete them. Only approved testimonials appear in widgets and on the wall. Turn on <em>Publish new testimonials automatically</em> to skip moderation. The owner gets an email for each new testimonial (when email is set up and notifications are on). Testimonials received by email or on social media can be added by hand; they are approved right away.</p>
+<h4>Testimonial wall</h4>
+<p>Embed all approved testimonials in a responsive grid on any page. Choose the theme and the number of testimonials in the dashboard and copy the code:</p>
+<pre><code>&lt;iframe id="trustzen-wall" src="https://proof.example.com/embed/wall/aBcD3fGh2JkL?theme=light&amp;limit=12"
+  title="Testimonials" loading="lazy" style="width:100%;min-height:420px;border:0;"&gt;&lt;/iframe&gt;</code></pre>
+<p>Add the auto-resize script once on the same page, so the frame always fits its content without a scroll bar. The wall posts a message <code>{ source: "trustzen-wall", height }</code> whenever its height changes:</p>
+<pre><code>&lt;script&gt;
+window.addEventListener("message", function (e) {
+  if (e.origin !== "https://proof.example.com" || !e.data || e.data.source !== "trustzen-wall") return;
+  document.getElementById("trustzen-wall").style.height = e.data.height + "px";
+});
+&lt;/script&gt;</code></pre>
+<p>Wall address options:</p>
+<table>
+  <tr><th>Parameter</th><th>Values</th></tr>
+  <tr><td><code>theme</code></td><td><code>light</code> (default), <code>dark</code> or <code>auto</code> (match the visitor's device).</td></tr>
+  <tr><td><code>limit</code></td><td>1–50 testimonials (default 20).</td></tr>
+  <tr><td><code>minRating</code></td><td>1–5, only show testimonials with at least this rating (default 1).</td></tr>
+  <tr><td><code>bg</code></td><td><code>transparent</code> removes the wall's background colour.</td></tr>
+  <tr><td><code>accent</code></td><td>A hex colour without <code>#</code>, e.g. <code>0f766e</code>.</td></tr>
+</table>
+<p>The wall can be embedded on any website (it is public, like the collection page), and it is not counted as widget views.</p>
+
+<h3 id="c-leads">Leads</h3>
+<p>Emails collected by email collector widgets appear under <strong>Leads</strong> with name, widget, page and date. Search by email or name, delete single leads, and click <strong>Export CSV</strong> to download them (UTF-8 with BOM so Excel opens it correctly; the current search is applied). CSV columns: <code>email, name, widget, page_url, extra, created_at</code>.</p>
+<p>The same email address is stored once per website. The owner can be notified by email, and every new lead is sent to the outgoing webhook, so it can go straight into a mailing tool (Mailchimp, Brevo, ConvertKit…) through Zapier or Make.</p>
+
+<h3 id="c-incoming">Incoming webhooks <span class="tag">Paid plans</span></h3>
+<p>Every website has a secret webhook URL, shown under <strong>Integrations</strong>:</p>
+<pre><code>https://proof.example.com/api/hooks/&lt;secret token&gt;</code></pre>
+<p>Every <code>POST</code> to this URL creates social proof events. The sender is detected automatically from its headers and data (Stripe, WooCommerce, Shopify or generic JSON). You can also force a format by adding <code>?preset=stripe</code>, <code>woocommerce</code>, <code>shopify</code> or <code>generic</code>.</p>
+<div class="warn">Keep the URL private: anyone who has it can add events. Click <em>Regenerate URL</em> if it leaks; the old URL stops working immediately and must be updated in every connected service. Provider signatures (Stripe-Signature, X-WC-Webhook-Signature, X-Shopify-Hmac-Sha256) are not checked — the secret in the URL is the authentication.</div>
+
+<h4>Stripe</h4>
+<ol class="steps">
+  <li>In Stripe open <strong>Developers → Webhooks → Add endpoint</strong>.</li>
+  <li>Paste the webhook URL as the endpoint URL.</li>
+  <li>Select the event <code>checkout.session.completed</code> and save. (<code>checkout.session.async_payment_succeeded</code>, <code>charge.succeeded</code> and <code>payment_intent.succeeded</code> are also understood. Choose only one of them, or the same sale may appear twice.)</li>
+</ol>
+<p>Each paid checkout becomes a purchase event with the customer's name, city and country. To show the product name, add it to the Checkout Session or Payment Link <strong>metadata</strong> as <code>product</code> (or <code>product_name</code>). For charges and payment intents the description is used when there is no metadata. Unpaid checkouts (delayed payment methods) are ignored until paid.</p>
+
+<h4>WooCommerce</h4>
+<ol class="steps">
+  <li>In WordPress go to <strong>WooCommerce → Settings → Advanced → Webhooks → Add webhook</strong>.</li>
+  <li>Set <em>Status</em> to Active and <em>Topic</em> to <em>Order created</em>. API version: the newest (v3).</li>
+  <li>Paste the webhook URL as the <em>Delivery URL</em> and save. WooCommerce sends a ping, which Trustzen acknowledges.</li>
+</ol>
+<p>Only orders with the status <em>processing</em> or <em>completed</em> create an event (the billing first and last name, city, country, the first product and its image). If your payment gateway creates orders as <em>pending</em> first, add a second webhook with the topic <em>Order updated</em>: the order then shows up once it is paid, and the same order is not shown twice.</p>
+
+<h4>Shopify</h4>
+<ol class="steps">
+  <li>In Shopify admin open <strong>Settings → Notifications → Webhooks → Create webhook</strong>.</li>
+  <li>Choose the event <em>Order creation</em> (or <em>Order payment</em>) and the format <em>JSON</em>.</li>
+  <li>Paste the webhook URL and save.</li>
+</ol>
+<p>Each order becomes a purchase event with the customer's name, city, country and the first product's title.</p>
+
+<h4>Zapier, Make and your own code</h4>
+<ol class="steps">
+  <li>Zapier: add a <em>Webhooks by Zapier</em> action with the event <em>POST</em>. Make: add an <em>HTTP → Make a request</em> module with the method <em>POST</em>.</li>
+  <li>Paste the webhook URL, set the payload type to JSON, and send the format below.</li>
+  <li>Map your app's fields (customer name, city, product…) to these keys.</li>
+</ol>
+<p>The generic JSON format:</p>
+<pre><code>{
+  "kind": "purchase",
+  "name": "Anna",
+  "city": "Berlin",
+  "country": "Germany",
+  "product": "Pro plan",
+  "url": "https://shop.com/products/pro",
+  "image": "https://shop.com/images/pro.png",
+  "rating": 5,
+  "message": "",
+  "created_at": "2026-10-16T10:00:00Z"
+}</code></pre>
+<table>
+  <tr><th>Key</th><th>Notes</th></tr>
+  <tr><td><code>kind</code></td><td><code>purchase</code> (default), <code>signup</code>, <code>review</code> or <code>custom</code>.</td></tr>
+  <tr><td><code>name</code></td><td>Or <code>first_name</code> + <code>last_name</code>. Names are anonymised when shown (first name only by default).</td></tr>
+  <tr><td><code>city</code>, <code>country</code></td><td><code>country</code> accepts a name or a 2-letter code (<code>DE</code> becomes “Germany”).</td></tr>
+  <tr><td><code>product</code>, <code>url</code>, <code>image</code></td><td>Optional. <code>url</code> opens when the popup is clicked; <code>image</code> is shown in the popup.</td></tr>
+  <tr><td><code>rating</code>, <code>message</code></td><td>For review events: a rating from 1 to 5 and the review text.</td></tr>
+  <tr><td><code>created_at</code></td><td>ISO date (or <code>createdAt</code>, or Unix seconds). Leave it out to use the current time.</td></tr>
+</table>
+<p>Every field is optional, but each event needs at least a name, product, city, country or message. Send up to <strong>50 events at once</strong> as a JSON array or as <code>{ "events": [ ... ] }</code>. <code>application/x-www-form-urlencoded</code> form posts with the same keys also work. Test from the command line:</p>
+<pre><code>curl -X POST "https://proof.example.com/api/hooks/YOUR-TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"kind":"signup","name":"Anna","city":"Berlin","country":"Germany"}'</code></pre>
+<h4>Responses</h4>
+<table>
+  <tr><th>Status</th><th>Body / meaning</th></tr>
+  <tr><td>200</td><td><code>{"ok":true,"created":1,"preset":"generic"}</code> — events created.</td></tr>
+  <tr><td>200</td><td><code>{"ok":true,"created":0,"ignored":true,"reason":"…"}</code> — valid request that creates no event (a ping, an unpaid order, an unsupported event type, or a duplicate delivery of the same Stripe event or order within 48 hours).</td></tr>
+  <tr><td>400</td><td>Invalid JSON or unknown <code>preset</code>.</td></tr>
+  <tr><td>402</td><td>The website's owner is on the free plan. Upgrade to a paid plan.</td></tr>
+  <tr><td>403</td><td>The owner's account is not active (banned).</td></tr>
+  <tr><td>404</td><td>Unknown webhook URL (wrong or regenerated token).</td></tr>
+  <tr><td>413</td><td>Body larger than 512 KB.</td></tr>
+  <tr><td>422</td><td>The data could not be turned into events; the <code>error</code> field says why.</td></tr>
+  <tr><td>429</td><td>More than 120 requests per minute to this URL.</td></tr>
+</table>
+
+<h3 id="c-outgoing">Outgoing webhooks <span class="tag">Paid plans</span></h3>
+<p>Set an <strong>Outgoing webhook URL</strong> in the website's <em>Settings → Notifications</em>. Trustzen then sends a <code>POST</code> request with JSON the moment a new <strong>lead</strong>, <strong>testimonial</strong> (from the collection page) or <strong>event</strong> (from form capture or an incoming webhook) arrives. Use it to feed a CRM, a mailing list, Slack, Zapier (“Catch Hook”) or Make (“Custom webhook”).</p>
+<pre><code>POST https://your-endpoint.example.com/trustzen
+Content-Type: application/json
+X-Trustzen-Event: lead
+X-Trustzen-Signature: sha256=5d1c0e…
+
+{
+  "type": "lead",
+  "site": { "id": 12, "name": "My online store", "domain": "shop.com" },
+  "data": { "email": "anna@example.com", "name": "Anna", "page": "/pricing", "widgetId": 34 },
+  "sent_at": "2026-10-16T10:00:00.000Z"
+}</code></pre>
+<table>
+  <tr><th><code>type</code></th><th><code>data</code></th></tr>
+  <tr><td><code>lead</code></td><td><code>{ email, name, page, widgetId }</code></td></tr>
+  <tr><td><code>testimonial</code></td><td><code>{ id, name, email, title, rating, body, avatar, status }</code> — <code>status</code> is <code>pending</code> or <code>approved</code>.</td></tr>
+  <tr><td><code>event</code></td><td><code>{ events: [ { id, source, kind, name, city, country, product, … } ] }</code> — <code>source</code> is <code>form</code> or <code>webhook</code>. Names are not anonymised here.</td></tr>
+</table>
+<h4>Verifying the signature</h4>
+<p><code>X-Trustzen-Signature</code> is <code>sha256=</code> followed by the hex HMAC-SHA256 of the <strong>raw request body</strong>, keyed with the website's webhook secret: the last part of its incoming webhook URL (<code>/api/hooks/<strong>THIS-PART</strong></code>). Regenerating the webhook URL also changes the signing secret. Always compute the HMAC over the raw bytes, before parsing the JSON.</p>
+<p>Node.js (Express):</p>
+<pre><code>import crypto from "node:crypto";
+import express from "express";
+
+const SECRET = process.env.TRUSTZEN_SECRET; // the token from your webhook URL
+const app = express();
+
+app.post("/trustzen", express.raw({ type: "application/json" }), (req, res) =&gt; {
+  const expected = "sha256=" + crypto.createHmac("sha256", SECRET).update(req.body).digest("hex");
+  const given = req.get("X-Trustzen-Signature") || "";
+  const valid = given.length === expected.length &amp;&amp;
+    crypto.timingSafeEqual(Buffer.from(given), Buffer.from(expected));
+  if (!valid) return res.status(401).send("Bad signature");
+
+  const payload = JSON.parse(req.body.toString("utf8"));
+  console.log(payload.type, payload.data);
+  res.sendStatus(204);
+});
+
+app.listen(3000);</code></pre>
+<p>PHP:</p>
+<pre><code>&lt;?php
+$secret = 'YOUR-WEBHOOK-TOKEN';
+$raw = file_get_contents('php://input');
+$expected = 'sha256=' . hash_hmac('sha256', $raw, $secret);
+$given = $_SERVER['HTTP_X_TRUSTZEN_SIGNATURE'] ?? '';
+
+if (!hash_equals($expected, $given)) {
+    http_response_code(401);
+    exit('Bad signature');
+}
+
+$payload = json_decode($raw, true);
+// $payload['type'] is "lead", "testimonial" or "event"
+http_response_code(204);</code></pre>
+<p>Delivery is best effort: one attempt, a 5-second timeout, redirects are not followed, and there are no retries. The URL must be a public <code>http://</code> or <code>https://</code> address on port 80, 443, 8080 or 8443; private and local network addresses are refused. Reply with any 2xx status quickly and do slow work afterwards.</p>
+
+<h3 id="c-analytics">Analytics</h3>
+<p>The <strong>Analytics</strong> page shows daily views and clicks for all widgets of the website (7, 30 or 90 days, UTC), as a chart or a table, and a table per widget with views, hovers, clicks, conversions and click rate. The widget editor shows the last 30 days for that widget.</p>
+<ul>
+  <li><strong>View</strong> – the widget (or one item of a rotating widget) appeared.</li>
+  <li><strong>Hover</strong> – the visitor moved the mouse over it.</li>
+  <li><strong>Click</strong> – a click on the widget or its button.</li>
+  <li><strong>Conversion</strong> – a goal: a copied coupon code or a submitted email address.</li>
+</ul>
+
+<h3 id="c-settings">Website settings</h3>
+<table>
+  <tr><th>Group</th><th>Options</th></tr>
+  <tr><td>General</td><td>Name, domain, extra allowed domains (one per line, up to 20).</td></tr>
+  <tr><td>Privacy</td><td>How customer names appear publicly: full name (Anna Schmidt), first name only (Anna, default) or initials (A. S.). Used for Reviews widgets that show review events, and for the “Shown as” label on the Events page. Each Recent activity widget has its own <em>Customer names</em> option in the editor (first name only by default).</td></tr>
+  <tr><td>Form capture</td><td>Capture form submissions on/off and the event kind to create.</td></tr>
+  <tr><td>Widget language</td><td>Language for dates and relative times (“3 minutes ago”) inside widgets, and the text direction. Default: the platform's default language.</td></tr>
+  <tr><td>Notifications</td><td>Email me about new leads and testimonials (sent to the account email); outgoing webhook URL.</td></tr>
+  <tr><td>Testimonials</td><td>Publish new testimonials automatically; collection page title and text.</td></tr>
+  <tr><td>Keys and URLs</td><td>Public site key (used in the snippet) and the incoming webhook URL, with <em>Regenerate URL</em>.</td></tr>
+  <tr><td>Danger zone</td><td>Delete the website with all its widgets, events, testimonials, leads and statistics. This can't be undone.</td></tr>
+</table>
+
+<!-- ───────────────────────────── Payments ───────────────────────────── -->
+<h2 id="payments">Payment gateways</h2>
+<p>Choose your <strong>currency</strong> in Settings → Payments first; it must be supported by every gateway you enable. Prices are entered per plan. Your customers see the enabled methods at checkout.</p>
+
+<h3 id="pay-stripe">Stripe (cards, Apple Pay, Google Pay – automatic renewal)</h3>
+<ol class="steps">
+  <li>In the Stripe Dashboard open <strong>Developers → API keys</strong> and copy the <em>Secret key</em> (<code>sk_live_…</code>, or <code>sk_test_…</code> for testing).</li>
+  <li>Open <strong>Developers → Webhooks → Add endpoint</strong>:
+    <ul>
+      <li>URL: <code>https://proof.example.com/api/payments/stripe/webhook</code></li>
+      <li>Events: <code>invoice.paid</code>, <code>checkout.session.completed</code>, <code>customer.subscription.deleted</code></li>
+    </ul>
+    Copy the <em>Signing secret</em> (<code>whsec_…</code>).</li>
+  <li>In Trustzen open Settings → Payments, switch on Stripe, paste both keys and save.</li>
+</ol>
+<p>You don't have to create products or prices in Stripe; they are sent with each checkout from your plans. Customers can cancel automatic renewal from their account page and keep access until the end of the paid period.</p>
+<div class="note">This Stripe webhook is for <em>your</em> billing. It is not the same as the customer-side Stripe integration in <a href="#c-incoming">Incoming webhooks</a>, which uses each website's own webhook URL.</div>
+
+<h3 id="pay-paypal">PayPal</h3>
+<ol class="steps">
+  <li>Go to <a href="https://developer.paypal.com/">developer.paypal.com</a> → <strong>Apps &amp; Credentials</strong>, create an app and copy the <em>Client ID</em> and <em>Secret</em> (Sandbox for testing, Live for real payments).</li>
+  <li>In Settings → Payments switch on PayPal, select the matching mode and paste both values.</li>
+</ol>
+<p>PayPal payments are one-off: a monthly or yearly purchase adds that period to the customer's plan.</p>
+
+<h3 id="pay-razorpay">Razorpay (India: UPI, cards, netbanking)</h3>
+<ol class="steps">
+  <li>In the Razorpay Dashboard open <strong>Account &amp; Settings → API Keys</strong> and generate a key.</li>
+  <li>Paste the <em>Key ID</em> and <em>Key secret</em> in Settings → Payments and switch Razorpay on. Set the currency to INR.</li>
+</ol>
+<p>Customers pay on a Razorpay payment page; the signature of the return request is verified before the plan is activated.</p>
+
+<h3 id="pay-offline">Bank transfer</h3>
+<p>Switch on <em>Bank transfer</em> and write your bank details in <em>Payment instructions</em>. Customers submit their transaction reference; you approve it in Admin → Payments.</p>
+
+<!-- ───────────────────────────── Email ───────────────────────────── -->
+<h2 id="email">Email (SMTP)</h2>
+<p>Email is used for password reset links, contact-form messages, and customers' notifications about new leads and testimonials. Enter your SMTP details in Settings → Email and switch on <em>Send emails</em>. Any provider works: your hosting mailbox, Gmail with an app password, Brevo, Mailgun, Amazon SES… Use port 587 with SSL off, or port 465 with SSL on. Send a test from Admin → System.</p>
+<p>Use a sender address on your own domain and set up SPF and DKIM for it at your email provider, so notifications don't land in spam. Customers can turn their notification emails off per website.</p>
+
+<!-- ───────────────────────────── i18n ───────────────────────────── -->
+<h2 id="i18n">Languages &amp; RTL</h2>
+<ol class="steps">
+  <li>Open <strong>Admin → Languages</strong> and add a language. Pick one from the list (the code, names and text direction are filled in) or enter your own, e.g. <code>pt-BR</code>.</li>
+  <li>Click <strong>Translate</strong>. Texts are grouped into <em>Interface</em> (the public site, sign-in pages, checkout, the customer dashboard, the widget editor, the testimonial collection page and wall) and <em>Site texts</em> (tagline, headline, footer and SEO texts from Settings). Search, show untranslated texts only, and save page by page.</li>
+  <li>Switch the language to <strong>Active</strong>. When two or more languages are active, visitors get a language switcher in the header. Their choice is remembered in a cookie.</li>
+  <li>Choose the <strong>default language</strong> for visitors who haven't picked one.</li>
+</ol>
+<p>Anything you leave empty falls back to English, so you can translate step by step. To translate offline (or with a translation service), click <strong>Download template</strong>: you get a JSON file with every text. Translate the values, keep the keys, and upload the file with <strong>Import</strong>. <strong>Export</strong> downloads the translations you have so far. You can also change the English wording itself: open English and enter your own text.</p>
+<p><strong>Included language packs:</strong> the folder <code>app/languages/</code> contains complete translations for <strong>Arabic</strong> (right to left) and <strong>Hindi</strong>: the public site, sign-in and checkout pages, the customer dashboard, the widget editor and the testimonial pages. Add the language in Admin → Languages, then import <code>ar.json</code> or <code>hi.json</code>. They were prepared with translation software, so have a native speaker review them before you launch.</p>
+<p>Right-to-left languages (Arabic, Hebrew, Persian, Urdu) flip the public site and the dashboard automatically. The admin panel stays in English.</p>
+<h4>Languages inside widgets</h4>
+<ul>
+  <li>Widget texts (messages, buttons, headlines) are written by your customers in the editor, in any language.</li>
+  <li>Dates and relative times (“3 minutes ago”) use the website's <em>Widget language</em> setting, or your platform's default language. They are formatted by the visitor's browser, so every language is supported without translation.</li>
+  <li>Set the website's <em>Text direction</em> to right to left for Arabic, Hebrew, Persian or Urdu websites; popups then mirror.</li>
+</ul>
+
+<!-- ───────────────────────────── SEO ───────────────────────────── -->
+<h2 id="seo">SEO</h2>
+<ul>
+  <li>The home page, pricing page, blog and content pages have titles, descriptions and Open Graph tags. Set them in Settings → SEO.</li>
+  <li><code>/sitemap.xml</code> and <code>/robots.txt</code> are generated automatically. Submit the sitemap in Google Search Console.</li>
+  <li>Set the <strong>Site URL</strong> in Settings → General so canonical URLs and the sitemap use your domain.</li>
+  <li>Blog posts get article structured data (BlogPosting), Open Graph tags and sitemap entries.</li>
+  <li>Testimonial collection pages and walls are marked <code>noindex</code>, so customers' pages don't compete with your site in search results.</li>
+  <li>Widgets are injected by JavaScript after the page loads and don't change your customers' page content, so they don't affect their SEO. The script is loaded with <code>async</code> and doesn't block rendering.</li>
+</ul>
+
+<!-- ───────────────────────────── Privacy ───────────────────────────── -->
+<h2 id="privacy">Privacy &amp; GDPR</h2>
+<p>Trustzen was designed to collect as little as possible. This is a summary to help you and your customers write privacy notices; it is not legal advice.</p>
+<h4>What the widgets store in the visitor's browser</h4>
+<ul>
+  <li>A <strong>random visitor id</strong> (<code>tz_v</code>) in <code>localStorage</code>. It is 16 random characters, contains no personal data, and is used only to count live visitors and widget views. It is not shared between websites.</li>
+  <li>Small flags to remember that a widget was closed, a cookie notice accepted, an email submitted or when a per-visitor countdown started (keys starting with <code>tz_</code>, in <code>localStorage</code> or <code>sessionStorage</code>).</li>
+  <li><strong>No cookies</strong> are set by the widgets, and requests to the widget API are sent without cookies. There is no cross-site tracking and no fingerprinting.</li>
+</ul>
+<h4>What the server stores</h4>
+<ul>
+  <li><strong>Events</strong>: name, city, country, product. Form capture keeps the <strong>first name only</strong>. Names are <strong>anonymised</strong> when shown publicly (first name or initials by default); the full name is visible only to the website owner.</li>
+  <li><strong>Live visitors</strong>: the random visitor id and the page path, for a few minutes.</li>
+  <li><strong>Statistics</strong>: daily counters per widget. No visitor IP addresses are stored for widgets; IP addresses are used in memory only, for rate limits.</li>
+  <li><strong>Leads</strong>: the email address and optional name a visitor typed into an email collector, with the page.</li>
+  <li><strong>Testimonials</strong>: what the author typed, and an optional photo. The collection page tells authors that their name, title, photo and text may be shown publicly.</li>
+</ul>
+<h4>Responsibilities</h4>
+<ul>
+  <li>Your customers are responsible for informing <em>their</em> visitors (for example in their privacy policy) and for obtaining any consent their local law requires, such as consent for email marketing. The email collector has an optional consent line for this. You process this data on their behalf; the default Privacy policy page says so.</li>
+  <li>Customers can delete events, leads, testimonials and whole websites at any time. Deleting a website deletes all of its data.</li>
+</ul>
+<h4>Honest-use policy</h4>
+<p>Social proof works because it is true. Trustzen shows real events and real testimonials; it has no “fake notification” generator. We recommend adding a rule to your Terms of service that customers may only show genuine activity and reviews, and that fake or misleading social proof leads to account suspension. In many countries fake reviews and fake urgency are illegal (for example under consumer protection rules in the EU, the UK and the US). From the admin panel you can review websites and ban accounts that break this rule; banning stops all their widgets at once.</p>
+
+<!-- ───────────────────────────── Performance ───────────────────────────── -->
+<h2 id="performance">Performance &amp; limits</h2>
+<ul>
+  <li><strong>Embed script</strong>: <code>w.js</code> is about 37 KB minified and <strong>about 14 KB gzipped</strong>, with no dependencies. It loads with <code>async</code>, waits for the page, and never breaks the host page: all errors are caught. The build fails if the gzipped size grows above 20 KB.</li>
+  <li><strong>One request per page view</strong>: the script fetches the website's configuration (widgets plus their data) in one request. Tracking is batched and sent every 10 seconds and when the page is hidden, with <code>sendBeacon</code>. Pages with a Live visitors widget send one heartbeat per minute.</li>
+  <li><strong>Server cache</strong>: each website's configuration is cached in memory for <strong>30 seconds</strong>, and browsers may reuse it for 30 seconds. Changes in the dashboard therefore appear on the website within about 30 seconds.</li>
+  <li><strong>Rendering</strong>: widgets live in a single Shadow DOM host with a constructable stylesheet, use CSS transitions and respect “reduce motion”.</li>
+</ul>
+<h4>Rate limits</h4>
+<table>
+  <tr><th>Endpoint</th><th>Limit</th></tr>
+  <tr><td>Widget configuration (<code>/api/w/{key}/config</code>)</td><td>120 requests per minute per IP address</td></tr>
+  <tr><td>Tracking (<code>/track</code>)</td><td>60 per minute per IP and website; at most 50 views, 50 hovers, 20 clicks and 5 conversions per request</td></tr>
+  <tr><td>Live visitor heartbeat (<code>/presence</code>)</td><td>30 per minute per IP and website</td></tr>
+  <tr><td>Form capture (<code>/capture</code>)</td><td>10 per minute per IP and website</td></tr>
+  <tr><td>Email collector (<code>/lead</code>)</td><td>5 per minute per IP and website</td></tr>
+  <tr><td>Incoming webhook</td><td>120 per minute per webhook URL, 512 KB per request, 50 events per request</td></tr>
+  <tr><td>Testimonial collection page</td><td>3 testimonials per hour per IP and website</td></tr>
+  <tr><td>CSV import</td><td>20 files per hour per customer, 2,000 rows and 1 MB per file</td></tr>
+  <tr><td>Sign-in / registration / password reset</td><td>10 per 15 minutes / 5 per hour / 5 per hour per IP</td></tr>
+</table>
+<p>Rate limits use the visitor's IP address from <code>X-Forwarded-For</code>. Set <a href="#env"><code>TRUSTED_PROXY_HOPS</code></a> correctly when you use Cloudflare, otherwise all visitors may appear to come from Cloudflare's addresses and share one limit.</p>
+<h4>Capacity</h4>
+<p>A single Node.js process on a 1–2 GB VPS comfortably serves millions of widget views per month, thanks to the 30-second cache. For more traffic, use MySQL (not SQLite), give the database more memory, and put a CDN in front of <code>/w.js</code>.</p>
+
+<!-- ───────────────────────────── Customise ───────────────────────────── -->
+<h2 id="customize">Customisation</h2>
+<h3>Branding without code</h3>
+<p>Logo, favicon, colours, texts, plans, pages, blog, widget branding and all interface texts (through Admin → Languages → English) are editable in the admin panel.</p>
+<h3>Code structure</h3>
+<table>
+  <tr><th>Path</th><th>Contents</th></tr>
+  <tr><td><code>src/app/(site)</code></td><td>Public pages: home, pricing, blog, pages, account, sign-in, checkout.</td></tr>
+  <tr><td><code>src/app/(dashboard)</code></td><td>The customer dashboard: websites, widgets, events, testimonials, leads, integrations, analytics, settings.</td></tr>
+  <tr><td><code>src/app/admin</code></td><td>Admin panel pages and server actions.</td></tr>
+  <tr><td><code>src/app/actions</code></td><td>Server actions for accounts, billing, the dashboard and the testimonial form.</td></tr>
+  <tr><td><code>src/app/api/w/[key]</code></td><td>Public widget API: <code>config</code>, <code>track</code>, <code>presence</code>, <code>capture</code>, <code>lead</code>.</td></tr>
+  <tr><td><code>src/app/api/hooks/[token]</code></td><td>Incoming webhooks. Formats are in <code>src/lib/webhooks/presets.ts</code>, examples in <code>samples.ts</code>.</td></tr>
+  <tr><td><code>src/app/t/[key]</code>, <code>src/app/embed/wall/[key]</code></td><td>Testimonial collection page and wall.</td></tr>
+  <tr><td><code>src/app/widget-preview</code></td><td>The page loaded inside the editor's live preview.</td></tr>
+  <tr><td><code>src/widget/types.ts</code></td><td>The widget contract: types, content, design, rules and their defaults. Shared by the embed script, the API and the editor.</td></tr>
+  <tr><td><code>src/widget/normalize.ts</code></td><td>Validates and clamps saved widget settings.</td></tr>
+  <tr><td><code>src/widget/runtime</code></td><td>The embed script source: <code>index.ts</code> (entry), <code>run.ts</code> (rules, triggers, rotation), <code>render.ts</code> (one renderer per type), <code>ui.ts</code> (Shadow DOM, positions), <code>capture.ts</code>, <code>sanitize.ts</code>, <code>widget.css</code>.</td></tr>
+  <tr><td><code>scripts/build-widget.mjs</code></td><td>Bundles the runtime into <code>public/w.js</code> with esbuild.</td></tr>
+  <tr><td><code>src/components/dashboard/widget-editor</code></td><td>The widget editor: content, design and rules fields, preview, type gallery.</td></tr>
+  <tr><td><code>src/lib</code></td><td>Database, settings, plans, sites, events, embed config, usage, auth, payments, email, notifications.</td></tr>
+  <tr><td><code>src/lib/db/migrations.ts</code></td><td>Database schema and default plans (migrations run automatically).</td></tr>
+  <tr><td><code>src/lib/i18n/messages.ts</code></td><td>Every interface text in English (the source for translations).</td></tr>
+  <tr><td><code>src/app/globals.css</code></td><td>Design tokens (colours, fonts) for the site and dashboard.</td></tr>
+</table>
+<h3>Adding a widget type</h3>
+<ol class="steps">
+  <li><strong><code>src/widget/types.ts</code></strong> – add the type name to <code>WIDGET_TYPES</code>, its content fields to <code>ContentByType</code>, and its defaults (content, plus any design/rule overrides) to <code>WIDGET_DEFAULTS</code>. Add it to <code>ROTATING_TYPES</code> if it shows a sequence of items.</li>
+  <li><strong><code>src/widget/normalize.ts</code></strong> – add a <code>case</code> that validates and clamps every content field.</li>
+  <li><strong>Runtime</strong> – write a renderer in <code>src/widget/runtime/render.ts</code> that returns the widget's element, and call it from the <code>switch</code> in <code>start()</code> in <code>run.ts</code>. If it needs server data (events, counts), add it to <code>buildWidgetData()</code> in <code>src/lib/embed.ts</code>. Add styles to <code>widget.css</code>.</li>
+  <li><strong>Editor</strong> – add the content fields in <code>src/components/dashboard/widget-editor/content-fields.tsx</code>, the icon, name and group in <code>type-meta.ts</code> and <code>src/components/dashboard/widget-types.tsx</code>, a small drawing in <code>type-mockup.tsx</code>, and sample data in <code>preview-data.ts</code> if it shows events.</li>
+  <li><strong>Messages</strong> – add <code>dash.type.your_type</code>, <code>dash.typeDesc.your_type</code> and any new <code>editor.*</code> labels to <code>src/lib/i18n/messages.ts</code>.</li>
+  <li>Run <code>npm run typecheck</code>, then <code>npm run build</code> (it rebuilds <code>w.js</code>) and restart.</li>
+</ol>
+<p>While working on the runtime, <code>npm run widget:build</code> rebuilds only <code>public/w.js</code> in a second. After editing any code always run <code>npm run build</code> and restart the app.</p>
+
+<!-- ───────────────────────────── Demo ───────────────────────────── -->
+<h2 id="demo">Demo mode</h2>
+<p>Set <code>DEMO_MODE=true</code> to make the admin panel <strong>and</strong> the customer dashboard read-only: everything can be viewed, nothing can be saved. Useful for a public demo. With <code>ADMIN_EMAIL</code> and <code>ADMIN_PASSWORD</code> set, the sign-in page pre-fills that account for visitors, and its password and profile can't be changed.</p>
+<p>Add <code>DEMO_SEED=true</code> to fill an empty database once with sample data: 45 sample customers (a third of them on paid plans, with payments and two bank transfers waiting for approval), contact messages, and a sample store <em>Northwind Store</em> owned by the administrator, plus a few customer websites, all with widgets, events, testimonials, leads and 30 days of statistics. The sample store's widgets are switched on for your own home page (Settings → Widgets → Show widgets on this website), so its domain is your Site URL.</p>
+<div class="note">Set <code>ADMIN_EMAIL</code>/<code>ADMIN_PASSWORD</code> and the Site URL (or <code>SITE_URL</code>) together with <code>DEMO_SEED</code>: the sample websites and widgets are created for the first administrator, and seeding runs only once per database.</div>
+
+<!-- ───────────────────────────── Update ───────────────────────────── -->
+<h2 id="update">Updating to a new version</h2>
+<ol class="steps">
+  <li>Back up the <code>storage</code> folder and your database.</li>
+  <li>Replace all files <em>except</em> <code>storage</code> (and your <code>.env</code> file, if you use one) with the new version.</li>
+  <li>Run <code>npm install</code> and <code>npm run build</code> (this also rebuilds <code>w.js</code>), then restart the app.</li>
+</ol>
+<p>Database changes are applied automatically the first time the new version starts. Your settings, users, websites, widgets and statistics are kept. Customers never need to change their snippet: <code>/w.js</code> always serves the newest script.</p>
+
+<!-- ───────────────────────────── Env ───────────────────────────── -->
+<h2 id="env">Environment variables (optional)</h2>
+<p>Not needed for a normal installation. Use them for Docker, Vercel or read-only hosting; see <code>.env.example</code>. Copy it to <code>.env.local</code> or set the variables in your hosting panel.</p>
+<table>
+  <tr><th>Variable</th><th>Purpose</th></tr>
+  <tr><td><code>PORT</code></td><td>Port to listen on (default 3000). <code>HOST</code> sets the address for <code>server.js</code> (default <code>0.0.0.0</code>).</td></tr>
+  <tr><td><code>SITE_URL</code></td><td>Public address of the platform, used when “Site URL” is empty in the admin panel.</td></tr>
+  <tr><td><code>STORAGE_DIR</code></td><td>Folder for config, SQLite database and uploads.</td></tr>
+  <tr><td class="wrap"><code>DB_DRIVER</code>, <code>DB_HOST</code>, <code>DB_PORT</code>, <code>DB_NAME</code>, <code>DB_USER</code>, <code>DB_PASSWORD</code>, <code>DB_FILE</code></td><td>Database connection (overrides <code>storage/config.json</code>). <code>DB_DRIVER</code> is <code>mysql</code> or <code>sqlite</code>.</td></tr>
+  <tr><td><code>DATABASE_URL</code></td><td>Alternative to the <code>DB_*</code> variables: <code>mysql://user:password@host:3306/trustzen?ssl=true</code>.</td></tr>
+  <tr><td><code>DB_SSL=true</code></td><td>Connect with TLS (required by most cloud databases).</td></tr>
+  <tr><td><code>APP_INSTALLED=true</code></td><td>Skip the installer when the database is configured with environment variables.</td></tr>
+  <tr><td class="wrap"><code>ADMIN_EMAIL</code>, <code>ADMIN_PASSWORD</code>, <code>ADMIN_NAME</code></td><td>Create or promote an administrator on start-up (no installer needed). The password needs at least 8 characters.</td></tr>
+  <tr><td><code>TRUSTED_PROXY_HOPS</code></td><td>Number of reverse proxies in front of the app that add <code>X-Forwarded-For</code> (default 1: Nginx, Apache/Passenger on cPanel, Vercel). Use <strong>2</strong> for Cloudflare in front of Nginx, so rate limits see the real visitor IP.</td></tr>
+  <tr><td><code>DEMO_MODE=true</code></td><td>Read-only admin panel and dashboard.</td></tr>
+  <tr><td><code>DEMO_SEED=true</code></td><td>Fill an empty database with sample data and install the Arabic and Hindi language packs (see <a href="#demo">Demo mode</a>).</td></tr>
+  <tr><td><code>NEXT_SERVER_ACTIONS_ENCRYPTION_KEY</code></td><td>Optional. Keeps form actions working across several servers or rebuilds.</td></tr>
+</table>
+
+<!-- ───────────────────────────── Troubleshooting ───────────────────────────── -->
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3>Widgets don't show on a customer's website</h3>
+<p>Open the website, press F12 and look at the <em>Console</em> and <em>Network</em> tabs (filter by <code>w.js</code> and <code>/api/w/</code>). Then check:</p>
+<table>
+  <tr><th>Cause</th><th>Solution</th></tr>
+  <tr><td><strong>Domain mismatch</strong> – <code>/api/w/…/config</code> returns <code>403</code> “This website is not allowed to use these widgets.”</td><td>The page's domain must be the website's domain, a subdomain of it, or an extra allowed domain. <code>www.</code> is handled automatically. Add staging sites, preview domains and second shops under <em>Settings → Extra allowed domains</em>. Shopify's <code>*.myshopify.com</code> preview address is a different domain too.</td></tr>
+  <tr><td><code>/api/w/…/config</code> returns <code>404</code></td><td>The <code>data-site</code> key in the snippet is wrong, or the website was deleted. Copy the snippet again.</td></tr>
+  <tr><td>The config loads but <code>widgets</code> is empty</td><td>No active widget, the widget's schedule has ended, the owner's account is banned, or the <strong>monthly view limit</strong> is reached (see the usage meter in the dashboard).</td></tr>
+  <tr><td>The config has widgets but nothing appears</td><td>Check the display rules: pages, devices, trigger (scroll, exit intent), and <em>After the visitor closes it</em> — once closed, a widget can stay hidden for the session, a day or for ever on that browser. Test in a private window. Live visitors and conversion counters stay hidden below their minimum. Recent activity needs events in the chosen period.</td></tr>
+  <tr><td><strong>Ad blockers</strong> and privacy extensions</td><td>Some block scripts from unknown domains or with names like “notification”. Test with the blocker off. Using your own domain for the platform helps; there is nothing customers can do for visitors who block it.</td></tr>
+  <tr><td><strong>Content-Security-Policy</strong> on the customer's site – the console shows “Refused to load the script” or “Refused to connect”</td><td>The customer must allow your platform domain:
+<pre><code>script-src  … https://proof.example.com;
+connect-src … https://proof.example.com;
+img-src     … https://proof.example.com https:;</code></pre>
+<code>img-src</code> is needed for testimonial photos and product images (from your platform and from the stores' image hosts). A strict <code>style-src</code> without <code>'unsafe-inline'</code> may affect how the widget container is positioned; add <code>'unsafe-inline'</code> to <code>style-src</code> if widgets appear behind page content.</td></tr>
+  <tr><td>Mixed content – the platform runs on <code>http://</code></td><td>Browsers block an <code>http://</code> script on an <code>https://</code> page. Install an SSL certificate and set the Site URL to <code>https://</code>; customers then copy the snippet again.</td></tr>
+  <tr><td>Caching or optimisation plugins</td><td>Clear the cache after adding the snippet. Plugins that combine or delay JavaScript (WP Rocket, Autoptimize, LiteSpeed Cache) can break <code>async</code> scripts: exclude <code>w.js</code> from them.</td></tr>
+  <tr><td>Changes don't appear</td><td>The configuration is cached for 30 seconds. Wait, then reload.</td></tr>
+</table>
+
+<h3>Integrations and email</h3>
+<table>
+  <tr><th>Problem</th><th>Solution</th></tr>
+  <tr><td>Webhooks return <strong>402</strong></td><td>The website's owner is on the free plan. Incoming webhooks need an active paid plan. Upgrade (or, as administrator, give the user a plan in Admin → Users).</td></tr>
+  <tr><td>Webhook returns 200 but no event appears</td><td>Read the <code>reason</code> in the response (Stripe → Webhooks → the event → Response; WooCommerce → Webhooks → Logs; Shopify doesn't show responses, test with Zapier or curl). Common causes: an unpaid or pending order, an event type that doesn't create events, or a repeated delivery of the same order.</td></tr>
+  <tr><td>Webhook returns 404</td><td>The URL was regenerated. Copy the new URL from Integrations into every connected service.</td></tr>
+  <tr><td>Product name is missing for Stripe</td><td>Add <code>product</code> to the Checkout Session or Payment Link metadata.</td></tr>
+  <tr><td><strong>Outgoing webhook not received</strong></td><td>The URL must be public (no <code>localhost</code>, private IPs or intranet names), use port 80, 443, 8080 or 8443, and answer within 5 seconds without a redirect (use the final <code>https://</code> address). Your server must allow outgoing connections. There are no retries. Only new leads, collection-page testimonials and captured or webhook events are sent — not events or testimonials added by hand or imported. To test, use a service such as webhook.site.</td></tr>
+  <tr><td>Signature doesn't match</td><td>Compute the HMAC over the <em>raw</em> body before parsing it, with the token from the <em>current</em> webhook URL, and compare it with the whole header including <code>sha256=</code>.</td></tr>
+  <tr><td><strong>Emails don't arrive</strong> (password reset, lead and testimonial notifications)</td><td>Configure SMTP, switch on <em>Send emails</em> and use Admin → System → Send test. Check the spam folder and set up SPF/DKIM for the sender domain. Customers can turn notifications off per website (Settings → Notifications).</td></tr>
+  <tr><td>Testimonial photo upload fails</td><td>The <code>storage</code> folder must be writable. On Vercel, uploads are not possible (see <a href="#install-vercel">Vercel</a>).</td></tr>
+</table>
+
+<h3>Installation and server</h3>
+<table>
+  <tr><th>Problem</th><th>Solution</th></tr>
+  <tr><td>Blank page or “502 Bad Gateway”</td><td>The app isn't running. Check that <code>npm run build</code> finished, then restart (cPanel: <em>Restart</em>; VPS: <code>pm2 restart trustzen</code>; logs: <code>pm2 logs trustzen</code>).</td></tr>
+  <tr><td><code>/w.js</code> returns 404</td><td><code>w.js</code> is created by <code>npm run build</code>. Run it again (look for the <code>[widget] public/w.js</code> line) and restart. If you build on another computer, upload <code>public/w.js</code> together with <code>.next</code>.</td></tr>
+  <tr><td>Build fails with “[widget] build failed”</td><td>Dev dependencies (esbuild, Tailwind, TypeScript) are missing. Run <code>npm install</code> (not <code>npm install --omit=dev</code>) before building.</td></tr>
+  <tr><td>“storage folder is writable” fails</td><td>Give the app user write access: <code>chmod -R 775 storage</code> (and <code>chown</code> it to the user running Node.js).</td></tr>
+  <tr><td>Database connection fails</td><td>Check host (usually <code>localhost</code> or <code>127.0.0.1</code>), port 3306, and that the user has all privileges on the database. On cPanel the database and username include your account prefix, e.g. <code>myacc_trustzen</code>.</td></tr>
+  <tr><td>SQLite option fails</td><td>SQLite needs Node.js 22.13+. Choose a newer Node.js version in your hosting panel or use MySQL.</td></tr>
+  <tr><td>Snippets or webhook URLs show the wrong address (e.g. <code>localhost</code>)</td><td>Set the Site URL in Settings → General to your public <code>https://</code> address.</td></tr>
+  <tr><td>Can't sign in after installing on HTTPS behind a proxy</td><td>Make sure the proxy sends <code>X-Forwarded-Proto</code> and <code>Host</code> headers (see the Nginx example).</td></tr>
+  <tr><td>Visitors get “Too many requests”</td><td>Behind Cloudflare + Nginx set <code>TRUSTED_PROXY_HOPS=2</code>, so each visitor has their own limit.</td></tr>
+  <tr><td>Payments are not activated</td><td>For Stripe, check the webhook URL and signing secret, and look at the webhook delivery log in Stripe. Set the correct Site URL.</td></tr>
+  <tr><td>I forgot the admin password</td><td>Use “Forgot password” (needs SMTP). Otherwise ask another administrator to set a new password in Admin → Users, or delete <code>storage/installed.lock</code>, restart, and run the installer again with the same database and the same admin email: the installer sets the new password on the existing account and keeps all data.</td></tr>
+</table>
+
+<!-- ───────────────────────────── Credits ───────────────────────────── -->
+<h2 id="credits">Credits</h2>
+<p>Trustzen uses these open-source projects. Their licences allow commercial use. Trustzen itself is released under the MIT licence.</p>
+<table>
+  <tr><th>Project</th><th>Licence</th></tr>
+  <tr><td>Next.js, React, React DOM</td><td>MIT</td></tr>
+  <tr><td>Tailwind CSS</td><td>MIT</td></tr>
+  <tr><td>Kysely, mysql2, zod, marked, undici, stripe-node, server-only</td><td>MIT</td></tr>
+  <tr><td>Nodemailer</td><td>MIT-0</td></tr>
+  <tr><td>Lucide icons (lucide-react)</td><td>ISC</td></tr>
+  <tr><td>esbuild (builds the embed script; not included in it)</td><td>MIT</td></tr>
+  <tr><td>TypeScript, ESLint (development only)</td><td>Apache 2.0, MIT</td></tr>
+  <tr><td>Bricolage Grotesque, Instrument Sans, JetBrains Mono fonts</td><td>SIL Open Font License 1.1 (licence files in <code>src/fonts</code>)</td></tr>
+</table>
+<p>The embed script <code>w.js</code> contains only Trustzen's own code.</p>
+
+<!-- ───────────────────────────── Changelog ───────────────────────────── -->
+<h2 id="changelog">Changelog</h2>
+<div class="card"><strong>1.0.0</strong> – 16 October 2026 – Initial release.
+<ul>
+  <li>10 widget types with a visual editor, live preview, design options and display rules.</li>
+  <li>Embed script of about 14 KB gzipped, Shadow DOM rendering, domain-locked public API.</li>
+  <li>Events from form capture, incoming webhooks (Stripe, WooCommerce, Shopify, Zapier, Make, generic JSON), CSV import and manual entry.</li>
+  <li>Testimonial collection page, moderation and embeddable wall.</li>
+  <li>Email leads with CSV export, outgoing webhooks with HMAC-SHA256 signatures, per-widget analytics.</li>
+  <li>Plans with website, widget and monthly view limits and branding removal; Stripe, PayPal, Razorpay and bank transfer.</li>
+  <li>Admin panel, blog, content pages, multi-language with RTL, web installer for MySQL or SQLite.</li>
+</ul></div>
+
+<!-- ───────────────────────────── Support ───────────────────────────── -->
+<h2 id="support">Support</h2>
+<p>If something isn't working, please read <a href="#troubleshooting">Troubleshooting</a> first. For further help, open an issue on <a href="https://github.com/epifive/trustzen/issues">GitHub</a>. Please include your hosting type, Node.js version, the website or webhook involved, and any error message from the logs or the browser console. Bug reports and pull requests are welcome. For a hosted version, paid installation or custom work, contact <a href="https://www.epifive.com/services">EpiFive</a>.</p>
+</main>
+</div>
+</body>
+</html>

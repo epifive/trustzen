@@ -1,0 +1,71 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Every widget below is a real render of public/w.js (see shoot.mjs, "w" shots), placed on one canvas. -->
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../../app/src/fonts/bricolage-grotesque.woff2") format("woff2"); font-weight: 200 800; }
+  @font-face { font-family: "Instrument"; src: url("../../app/src/fonts/instrument-sans.woff2") format("woff2"); font-weight: 400 700; }
+  html, body { margin: 0; width: 1440px; height: 1000px; overflow: hidden; }
+  body { position: relative; font-family: "Instrument", sans-serif; color: #1d1830;
+    background-color: #f6f5fb;
+    background-image:
+      radial-gradient(760px 480px at 6% 4%, rgba(91, 63, 196, .16), transparent 70%),
+      radial-gradient(640px 420px at 98% 18%, rgba(242, 201, 76, .22), transparent 70%),
+      linear-gradient(rgba(91,63,196,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(91,63,196,.07) 1px, transparent 1px);
+    background-size: auto, auto, 24px 24px, 24px 24px; }
+  .head { position: absolute; left: 96px; top: 66px; width: 420px; }
+  .eyebrow { font-size: 15px; font-weight: 600; color: #5b3fc4; }
+  .eyebrow i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f2c94c; margin-right: 8px; vertical-align: 1px; box-shadow: 0 0 0 3px rgba(242,201,76,.3); }
+  h1 { font-family: "Bricolage"; font-size: 54px; line-height: 1.0; letter-spacing: -.03em; margin: 12px 0 16px; font-weight: 800; }
+  h1 em { font-style: normal; color: #5b3fc4; }
+  .head p { font-size: 18.5px; line-height: 1.5; color: #5d5772; margin: 0; }
+  .head ul { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 9px; }
+  .head li { font-size: 15.5px; color: #3b3550; display: flex; align-items: center; gap: 10px; }
+  .head li::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: #ece8fb url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b3fc4' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 11px no-repeat; flex-shrink: 0; }
+
+  .w { position: absolute; }
+  /* Renders are 2x with 56 px of transparent padding around each card (for the shadow). */
+  .w img { display: block; zoom: .5; }
+  .tag { position: absolute; z-index: 2; font-size: 12.5px; font-weight: 700; letter-spacing: .02em; color: #5b3fc4; background: #fff; border: 1px solid #e3def6; padding: 4px 10px; border-radius: 999px; box-shadow: 0 4px 12px rgba(60, 40, 140, .08); white-space: nowrap; }
+
+  .bars { position: absolute; left: 96px; right: 96px; bottom: 54px; height: 214px; background: #fff; border: 1px solid #e6e2f3; border-radius: 18px; box-shadow: 0 24px 60px rgba(40, 24, 110, .12); overflow: hidden; }
+  .bars .chrome { height: 34px; background: #f3f1f9; border-bottom: 1px solid #e9e6f3; display: flex; align-items: center; gap: 7px; padding: 0 14px; }
+  .bars .chrome i { width: 10px; height: 10px; border-radius: 50%; background: #d9d4ea; }
+  .bars .chrome i:nth-child(1) { background: #ff6159; } .bars .chrome i:nth-child(2) { background: #ffbd2e; } .bars .chrome i:nth-child(3) { background: #28c941; }
+  .bars .url { margin-left: 18px; flex: 1; max-width: 360px; height: 20px; border-radius: 6px; background: #fff; border: 1px solid #e6e2f3; font-size: 11.5px; color: #8b85a0; display: flex; align-items: center; padding-left: 10px; }
+  .bars .bar { position: relative; overflow: hidden; height: 54px; }
+  .bars .bar img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); zoom: .5; }
+  .bars .page { height: 46px; display: flex; gap: 14px; align-items: center; padding: 0 28px; }
+  .bars .page span { height: 10px; border-radius: 5px; background: #eeecf5; }
+  .bars .lbl { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
+</style></head>
+<body>
+  <div class="head">
+    <div class="eyebrow"><i></i>Widget library</div>
+    <h1>10 widgets.<br><em>One tiny script.</em></h1>
+    <p>Every widget is styled, positioned and scheduled from the dashboard, with a live preview.</p>
+    <ul>
+      <li>Light, dark or auto theme, your colours and corner radius</li>
+      <li>Corner popups, top or bottom bars, or a centred modal</li>
+      <li>Pages, devices, delay, scroll and exit-intent triggers</li>
+    </ul>
+  </div>
+
+  <div class="w" style="left:40px; top:452px"><span class="tag" style="left:66px; top:20px">Any widget in dark mode</span><img src="../raw/w08-dark-recent.png"></div>
+
+  <!-- column A -->
+  <div class="w" style="left:556px; top:28px"><span class="tag" style="left:66px; top:20px">Recent activity</span><img src="../raw/w01-recent.png"></div>
+  <div class="w" style="left:556px; top:170px"><span class="tag" style="left:66px; top:20px">Live visitors</span><img src="../raw/w02-live.png"></div>
+  <div class="w" style="left:556px; top:298px"><span class="tag" style="left:66px; top:20px">Conversion counter</span><img src="../raw/w03-counter.png"></div>
+  <div class="w" style="left:556px; top:426px"><span class="tag" style="left:66px; top:20px">Custom HTML</span><img src="../raw/w07-custom.png"></div>
+  <!-- column B -->
+  <div class="w" style="left:942px; top:14px"><span class="tag" style="left:66px; top:20px">Reviews</span><img src="../raw/w04-review.png"></div>
+  <div class="w" style="left:942px; top:227px"><span class="tag" style="left:66px; top:20px">Coupon</span><img src="../raw/w05-coupon.png"></div>
+  <div class="w" style="left:942px; top:417px"><span class="tag" style="left:66px; top:20px">Email collector</span><img src="../raw/w06-email.png"></div>
+
+  <div class="bars">
+    <div class="chrome"><i></i><i></i><i></i><div class="url">northwindstore.com/collections/summer</div></div>
+    <div class="bar"><img src="../raw/w11-announcement.png"><span class="tag lbl">Announcement bar</span></div>
+    <div class="bar" style="margin-top:6px"><img src="../raw/w12-countdown.png"><span class="tag lbl">Countdown timer</span></div>
+    <div class="bar" style="position:absolute; left:0; right:0; bottom:0"><img src="../raw/w13-cookie.png"><span class="tag lbl">Cookie notice</span></div>
+  </div>
+</body></html>

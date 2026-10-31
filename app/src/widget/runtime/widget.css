@@ -1,0 +1,180 @@
+/* Trustzen embed styles. Injected inside the widget's shadow root only; minified by scripts/build-widget.mjs. */
+
+.tz { all: initial; font-family: inherit }
+.tz *, .tz *::before, .tz *::after { box-sizing: border-box; margin: 0; padding: 0 }
+
+/* ---------- slots ---------- */
+.tz-s { position: fixed; display: flex; flex-direction: column; gap: 12px; pointer-events: none }
+.tz-s > * { pointer-events: auto }
+.tz-s-c { max-width: calc(100vw - 32px) }
+.tz-tl, .tz-tr { top: calc(20px + var(--tz-tb, 0px)) }
+.tz-bl, .tz-br { bottom: calc(20px + var(--tz-bb, 0px)) }
+.tz-tl, .tz-bl { left: 20px }
+.tz-tr, .tz-br { right: 20px }
+.tz-s-tb { top: 0; left: 0; right: 0 }
+.tz-s-bb { bottom: 0; left: 0; right: 0 }
+.tz-s-ce { inset: 0; align-items: center; justify-content: center; padding: 16px; background: rgba(14, 11, 28, .5); opacity: 0; transition: opacity .3s ease; pointer-events: auto; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px) }
+.tz-s-ce.tz-on { opacity: 1 }
+.tz-s-ce:empty { display: none }
+
+/* ---------- card ---------- */
+.tz-c {
+  position: relative; width: var(--w, 340px); max-width: 100%;
+  background: var(--bg); color: var(--fg); border: 1px solid var(--bd); border-radius: var(--r);
+  font-size: 14px; line-height: 1.45; font-weight: 400; letter-spacing: normal; text-align: start; text-transform: none;
+  padding: 14px 16px; overflow-wrap: anywhere; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  opacity: 0; transform: var(--t0, none);
+  transition: opacity .35s ease, transform .5s cubic-bezier(.16, 1, .3, 1);
+}
+.tz-c.tz-on { opacity: 1; transform: none }
+.tz-c.tz-na { transition: none }
+.tz-sys { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif }
+.tz-sh { box-shadow: var(--sh) }
+.tz-hx { padding-inline-end: 40px }
+.tz-ce { width: var(--w, 380px); padding: 26px 24px 22px; text-align: center }
+.tz-ce.tz-hx { padding-inline-end: 24px }
+.tz-ce .tz-row { text-align: start }
+.tz-clk { cursor: pointer }
+
+
+.tz-x {
+  position: absolute; top: 8px; inset-inline-end: 8px; width: 26px; height: 26px; border-radius: 50%;
+  border: 0; background: transparent; color: inherit; opacity: .45; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: opacity .15s, background .15s;
+}
+.tz-x:hover, .tz-x:focus-visible { opacity: 1; background: var(--at) }
+.tz-x .tz-ic { width: 14px; height: 14px }
+.tz-c :focus-visible { outline: 2px solid var(--fo); outline-offset: 2px }
+.tz-c:focus { outline: none }
+
+.tz-ic { display: inline-flex; flex: none; width: 14px; height: 14px }
+.tz-ic svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round }
+
+.tz-row { display: flex; align-items: center; gap: 13px; text-decoration: none; color: inherit }
+.tz-tx { min-width: 0; flex: 1 }
+.tz-b { font-weight: 650 }
+.tz-m { display: flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 12px; opacity: .66 }
+.tz-m .tz-ic { width: 13px; height: 13px; color: var(--ok) }
+.tz-m .tz-ic svg { stroke-width: 2.6 }
+
+.tz-av {
+  flex: none; width: 48px; height: 48px; border-radius: 50%; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--a); color: var(--on); font-size: 19px; font-weight: 650; line-height: 1;
+}
+.tz-av.tz-sq { border-radius: calc(var(--rb) + 2px) }
+.tz-av img { width: 100%; height: 100%; object-fit: cover; display: block }
+.tz-av .tz-ic { width: 22px; height: 22px }
+.tz-av.tz-soft { background: var(--at); color: var(--a2) }
+.tz-sm { width: 34px; height: 34px; font-size: 14px }
+
+.tz-dot { position: relative; width: 10px; height: 10px; border-radius: 50%; background: #22c55e }
+.tz-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #22c55e; animation: tz-pulse 1.8s ease-out infinite }
+@keyframes tz-pulse { from { transform: scale(1); opacity: .7 } to { transform: scale(3.2); opacity: 0 } }
+
+.tz-h { font-size: 16px; line-height: 1.3; font-weight: 700; margin-bottom: 4px }
+.tz-p { opacity: .74 }
+.tz-sub { font-size: 11.5px; opacity: .6; margin-top: 10px; line-height: 1.4 }
+
+.tz-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex: none;
+  font: inherit; font-size: 13.5px; font-weight: 650; line-height: 1.2; padding: 10px 16px;
+  border: 0; border-radius: var(--rb); background: var(--btb); color: var(--btf);
+  cursor: pointer; text-decoration: none; white-space: nowrap; transition: filter .15s, transform .1s;
+}
+.tz-btn:hover { filter: brightness(1.08) }
+.tz-btn:active { transform: translateY(1px) }
+.tz-btn[disabled] { opacity: .6; cursor: default }
+.tz-blk { display: flex; width: 100%; margin-top: 12px }
+.tz-lk { color: var(--lk) !important; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px }
+
+.tz-bdg {
+  display: inline-block; flex: none; padding: 3px 9px; border-radius: 999px; background: var(--bdb); color: var(--bdf);
+  font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.5;
+}
+
+.tz-brand { display: block; margin-top: 8px; font-size: 10.5px; line-height: 1.2; text-align: end; opacity: .5; text-decoration: none; color: inherit !important }
+.tz-brand:hover { opacity: .85 }
+
+/* ---------- bars ---------- */
+.tz-bar {
+  width: 100%; max-width: none; border-radius: 0; border-width: 0 0 1px; padding: 10px 48px; min-height: 50px;
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 14px; text-align: center;
+}
+.tz-s-bb .tz-bar { border-width: 1px 0 0 }
+.tz-bar .tz-brand { margin: 0; font-size: 10px; position: absolute; bottom: 3px; inset-inline-end: 12px }
+.tz-bar .tz-btn { padding: 7px 14px; font-size: 13px }
+.tz-bar .tz-x { top: 50%; margin-top: -13px; inset-inline-end: 10px }
+.tz-bar .tz-in { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px 12px }
+
+/* ---------- stars / review ---------- */
+.tz-st { display: flex; gap: 2px; color: #f5a524; margin-bottom: 8px }
+.tz-st .tz-ic { width: 16px; height: 16px }
+.tz-st svg { fill: currentColor; stroke: none }
+.tz-st .tz-e { color: var(--bd2) }
+.tz-q { font-size: 14px; line-height: 1.5 }
+.tz-ce .tz-st { justify-content: center }
+.tz-by { display: flex; align-items: center; gap: 10px; margin-top: 12px }
+.tz-by .tz-tx { line-height: 1.3 }
+.tz-t2 { display: block; font-size: 12px; opacity: .62 }
+
+/* ---------- countdown ---------- */
+.tz-cd { display: inline-flex; gap: 6px; direction: ltr; justify-content: center }
+.tz-u { min-width: 46px; padding: 6px 4px 5px; border-radius: var(--rb); background: var(--at); text-align: center; line-height: 1 }
+.tz-u b { display: block; font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums }
+.tz-u small { display: block; font-size: 9.5px; opacity: .72; margin-top: 3px; text-transform: uppercase; letter-spacing: .06em }
+.tz-bar .tz-u { min-width: 38px; padding: 4px 3px }
+.tz-bar .tz-u b { font-size: 15px }
+.tz-c:not(.tz-bar) .tz-cd { display: flex; margin: 12px 0 0 }
+.tz-c:not(.tz-bar):not(.tz-ce) .tz-cd { justify-content: flex-start }
+
+/* ---------- coupon ---------- */
+.tz-code {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px;
+  padding: 7px; padding-inline-start: 14px; border: 1.5px dashed var(--a2); border-radius: calc(var(--rb) + 2px); background: var(--at);
+}
+.tz-code code { font: 700 16px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .08em; color: var(--fg); overflow: hidden; text-overflow: ellipsis }
+.tz-hd { display: flex; align-items: flex-start; gap: 12px }
+.tz-ce .tz-hd { flex-direction: column; align-items: center }
+.tz-hd .tz-av { width: 40px; height: 40px }
+.tz-hd .tz-ic { width: 20px; height: 20px }
+
+/* ---------- forms ---------- */
+.tz-f { display: flex; flex-direction: column; gap: 8px; margin-top: 12px }
+.tz-f input {
+  width: 100%; font: inherit; font-size: 14px; line-height: 1.3; padding: 10px 12px; color: inherit;
+  background: var(--ib); border: 1px solid var(--bd2); border-radius: var(--rb); outline: none; transition: border-color .15s, box-shadow .15s;
+}
+.tz-f input::placeholder { color: inherit; opacity: .5 }
+.tz-f input:focus { border-color: var(--a2); box-shadow: 0 0 0 3px var(--at) }
+.tz-f .tz-btn { width: 100%; padding: 11px 16px }
+.tz-err { color: var(--er); font-size: 12.5px }
+.tz-err:empty { display: none }
+.tz-done { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-weight: 600 }
+.tz-done .tz-ic { width: 22px; height: 22px; color: var(--ok) }
+.tz-sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+
+/* ---------- custom html ---------- */
+.tz-html { text-align: start }
+.tz-html > * + * { margin-top: .55em }
+.tz-html h3 { font-size: 16px; line-height: 1.3 }
+.tz-html h4 { font-size: 14.5px }
+.tz-html ul, .tz-html ol { padding-inline-start: 1.3em }
+.tz-html a { color: var(--lk); text-decoration: underline }
+.tz-html img { max-width: 100%; height: auto; border-radius: var(--rb) }
+.tz-html mark { background: var(--at); color: inherit; padding: 0 .2em; border-radius: 3px }
+.tz-html code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .92em; background: var(--at); padding: .1em .35em; border-radius: 4px }
+
+/* ---------- small screens: corner cards become full-width bottom cards ---------- */
+@media (max-width: 519px) {
+  .tz-s-c { left: 12px; right: 12px; top: auto; bottom: calc(12px + var(--tz-bb, 0px)); max-width: none }
+  .tz-s-c .tz-c { width: 100% }
+  .tz-bar { padding: 9px 40px 9px 14px; padding-inline-start: 14px; padding-inline-end: 40px; font-size: 13.5px }
+  .tz-bar .tz-brand { position: static; width: 100%; text-align: center }
+  .tz-ce { padding: 22px 18px 18px }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tz-c { transform: none !important; transition: opacity .2s ease !important }
+  .tz-dot::after { animation: none }
+}

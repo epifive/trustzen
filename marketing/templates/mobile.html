@@ -1,0 +1,40 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../../app/src/fonts/bricolage-grotesque.woff2") format("woff2"); font-weight: 200 800; }
+  @font-face { font-family: "Instrument"; src: url("../../app/src/fonts/instrument-sans.woff2") format("woff2"); font-weight: 400 700; }
+  html, body { margin: 0; width: 1440px; height: 1000px; overflow: hidden; }
+  body { font-family: "Instrument", sans-serif; color: #1d1830;
+    background-color: #f6f5fb;
+    background-image:
+      radial-gradient(700px 420px at 50% 112%, rgba(91, 63, 196, .22), transparent 70%),
+      radial-gradient(520px 320px at 92% 0%, rgba(242, 201, 76, .22), transparent 70%),
+      linear-gradient(rgba(91,63,196,.075) 1px, transparent 1px), linear-gradient(90deg, rgba(91,63,196,.075) 1px, transparent 1px);
+    background-size: auto, auto, 24px 24px, 24px 24px; }
+  .eyebrow { text-align: center; margin: 52px 0 0; font-size: 15px; font-weight: 600; color: #5b3fc4; letter-spacing: .01em; }
+  .eyebrow i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f2c94c; margin-right: 8px; vertical-align: 1px; box-shadow: 0 0 0 3px rgba(242,201,76,.3); }
+  h1 { font-family: "Bricolage"; font-size: 50px; letter-spacing: -.025em; text-align: center; margin: 8px 0 8px; font-weight: 800; }
+  p { text-align: center; font-size: 20px; color: #635d78; margin: 0; }
+  .row { display: flex; justify-content: center; align-items: flex-start; gap: 64px; margin-top: 46px; }
+  .col { display: flex; flex-direction: column; align-items: center; }
+  .phone { width: 290px; height: 667px; border-radius: 44px; border: 11px solid #17142a; overflow: hidden; background: #fff; box-shadow: 0 34px 70px rgba(40, 24, 110, .22), 0 0 0 1px rgba(0,0,0,.06); position: relative; }
+  .phone::before { content: ""; position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 84px; height: 24px; border-radius: 14px; background: #17142a; z-index: 2; }
+  .status { height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px 0 30px; font-size: 14px; font-weight: 700; color: #1d1830; box-sizing: border-box; }
+  .status b { display: flex; gap: 5px; align-items: center; }
+  .status b i { display: block; width: 4px; border-radius: 1px; background: #1d1830; }
+  .status b u { display: block; width: 22px; height: 11px; border: 1.5px solid #1d1830; border-radius: 3px; position: relative; margin-left: 4px; }
+  .status b u::after { content: ""; position: absolute; inset: 1.5px 5px 1.5px 1.5px; background: #1d1830; border-radius: 1px; }
+  .phone img { width: 100%; display: block; }
+  .col:nth-child(2) { transform: translateY(-22px); }
+  .label { margin-top: 18px; font-size: 15px; font-weight: 600; color: #4b4560; background: #fff; border: 1px solid #e6e3f1; padding: 6px 14px; border-radius: 999px; }
+</style></head>
+<body>
+  <div class="eyebrow"><i></i>Responsive everywhere</div>
+  <h1>Made for every screen</h1>
+  <p>Widgets adapt to phones, and the whole dashboard and editor work on mobile too.</p>
+  <div class="row">
+    <div class="col"><div class="phone"><div class="status" style="background:#f7f6fb"><span>9:41</span><b><i style="height:5px"></i><i style="height:7px"></i><i style="height:9px"></i><i style="height:11px"></i><u></u></b></div><img src="../raw/m1-home.png"></div><span class="label">Live popup on a phone</span></div>
+    <div class="col"><div class="phone"><div class="status"><span>9:41</span><b><i style="height:5px"></i><i style="height:7px"></i><i style="height:9px"></i><i style="height:11px"></i><u></u></b></div><img src="../raw/m3-editor.png"></div><span class="label">Widget editor with live preview</span></div>
+    <div class="col"><div class="phone"><div class="status"><span>9:41</span><b><i style="height:5px"></i><i style="height:7px"></i><i style="height:9px"></i><i style="height:11px"></i><u></u></b></div><img src="../raw/m4-analytics.png"></div><span class="label">Analytics on the go</span></div>
+  </div>
+</body></html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Bricolage"; src: url("../../app/src/fonts/bricolage-grotesque.woff2") format("woff2"); font-weight: 200 800; }
+  @font-face { font-family: "Instrument"; src: url("../../app/src/fonts/instrument-sans.woff2") format("woff2"); font-weight: 400 700; }
+  html, body { margin: 0; width: 1440px; height: 790px; overflow: hidden; }
+  body {
+    position: relative; box-sizing: border-box; padding: 66px 80px; color: #fff; font-family: "Instrument", sans-serif;
+    background-color: #4a31ad;
+    background-image:
+      radial-gradient(900px 520px at 88% -10%, rgba(242, 201, 76, .22), transparent 60%),
+      radial-gradient(800px 600px at -5% 110%, rgba(140, 110, 255, .45), transparent 60%),
+      linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px),
+      linear-gradient(135deg, #5b3fc4, #3f2896);
+    background-size: auto, auto, 24px 24px, 24px 24px, auto;
+  }
+  .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 40px; }
+  h1 { font-family: "Bricolage"; font-size: 50px; line-height: 1.02; letter-spacing: -.025em; margin: 0; font-weight: 800; }
+  h1 em { font-style: normal; color: #f2c94c; }
+  .sub { font-size: 20px; line-height: 1.45; color: rgba(255,255,255,.8); margin: 12px 0 0; max-width: 760px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: "Bricolage"; font-size: 30px; font-weight: 800; letter-spacing: -.02em; flex-shrink: 0; margin-bottom: 6px; }
+  .brand svg { width: 46px; height: 46px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.25)); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.18); border-radius: 18px; padding: 24px 26px 26px; backdrop-filter: blur(4px); }
+  .top { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
+  .num { display: inline-block; background: #f2c94c; color: #2c2200; font-weight: 700; font-size: 13.5px; padding: 3px 9px; border-radius: 7px; letter-spacing: .01em; }
+  .card h2 { font-family: "Bricolage"; font-size: 22px; margin: 0; letter-spacing: -.01em; font-weight: 700; }
+  .card p { margin: 0; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.84); }
+</style></head>
+<body>
+  <div class="head">
+    <div>
+      <h1>Run your own <em>social proof</em> platform</h1>
+      <p class="sub">Customers sign up, paste one line of code and show real purchases, reviews and offers on their websites. You sell the plans.</p>
+    </div>
+    <div class="brand">
+      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#fff"/><rect x="5.5" y="9.5" width="20" height="12.5" rx="3.5" fill="#5b3fc4"/><path d="M9.5 21.5v4.5l4.5-4.5z" fill="#5b3fc4"/><circle cx="10.5" cy="15.75" r="2.3" fill="#fff" fill-opacity=".7"/><rect x="14.5" y="13.4" width="7.5" height="1.9" rx=".95" fill="#fff" fill-opacity=".7"/><rect x="14.5" y="16.6" width="5" height="1.9" rx=".95" fill="#fff" fill-opacity=".45"/><circle cx="25" cy="8.5" r="3.6" fill="#f2c94c" stroke="#fff" stroke-width="1.6"/></svg>
+      Trustzen
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="top"><span class="num">10</span><h2>Widget types</h2></div><p>Recent activity, live visitors, conversion counter, reviews, announcement bar, coupon, countdown, email collector, cookie notice, custom HTML.</p></div>
+    <div class="card"><div class="top"><span class="num">Real data</span><h2>Integrations</h2></div><p>Stripe, WooCommerce, Shopify, Zapier and Make webhooks, form capture and CSV import. No fake notifications.</p></div>
+    <div class="card"><div class="top"><span class="num">Wall</span><h2>Testimonials</h2></div><p>Hosted collection page with star ratings and photos, moderation queue and an embeddable testimonial wall.</p></div>
+    <div class="card"><div class="top"><span class="num">CSV</span><h2>Lead capture</h2></div><p>Email collector popups, a lead list with search and CSV export, and signed outgoing webhooks to any CRM.</p></div>
+    <div class="card"><div class="top"><span class="num">30 days</span><h2>Analytics</h2></div><p>Views, hovers, clicks, conversions and click rate for every widget, per day, as a chart or a table.</p></div>
+    <div class="card"><div class="top"><span class="num">RTL</span><h2>Multi-language</h2></div><p>Translate the site and the customer dashboard in the admin panel. Arabic and Hindi packs included.</p></div>
+    <div class="card"><div class="top"><span class="num">$</span><h2>Paid plans</h2></div><p>Website, widget and monthly view limits. Stripe subscriptions, PayPal, Razorpay (UPI) and bank transfer.</p></div>
+    <div class="card"><div class="top"><span class="num">1 click</span><h2>Web installer</h2></div><p>MySQL / MariaDB or zero-setup SQLite. Guides for cPanel, VPS, Docker and Vercel. Updates migrate automatically.</p></div>
+    <div class="card"><div class="top"><span class="num">14 KB</span><h2>Light and private</h2></div><p>One 14 KB script in a Shadow DOM. No cookies, no visitor IPs stored, domain-locked API.</p></div>
+  </div>
+</body></html>
