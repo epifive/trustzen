@@ -1,5 +1,14 @@
 # Trustzen
 
+<!-- epifive:header -->
+> Show recent sales, live visitor counts, reviews and testimonials on any website with one script tag, served from your own server.
+
+[![Licence: MIT](https://img.shields.io/badge/licence-MIT-0a7560?style=flat-square)](LICENSE)
+[![Latest release](https://img.shields.io/github/v/release/epifive/trustzen?style=flat-square&label=release&color=4f5bd5)](https://github.com/epifive/trustzen/releases/latest)
+[![GitHub stars](https://img.shields.io/github/stars/epifive/trustzen?style=flat-square&color=b5791b)](https://github.com/epifive/trustzen/stargazers)
+
+**[Docs & guide on epifive.com](https://www.epifive.com/blog/trustzen-open-source-testimonial-widget?utm_source=github&utm_medium=readme&utm_campaign=trustzen)** · **[Live demo](https://trustzen-eight.vercel.app)** · **[Download the latest release](https://github.com/epifive/trustzen/releases/latest)**
+
 **Open-source social proof, testimonial and conversion widgets — as a self-hosted SaaS.** Built
 with Next.js 16, React 19 and Tailwind CSS 4. Runs on a VPS, Docker, cPanel (Node.js) or Vercel,
 with MySQL/MariaDB or a zero-setup SQLite database.
@@ -83,3 +92,7 @@ Bug reports and pull requests are welcome — please open an
 ## License
 
 [MIT](LICENSE) © 2026 EpiFive
+
+---
+
+<p align="center">Made by <b>EpiFive</b> — <a href="https://www.epifive.com/?utm_source=github&utm_medium=readme&utm_campaign=trustzen">www.epifive.com</a> · <a href="https://www.epifive.com/open-source?utm_source=github&utm_medium=readme&utm_campaign=trustzen">more open-source projects</a></p>
